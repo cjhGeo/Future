@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CCB36B022903895F009C2E01 /* FutureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB36B012903895F009C2E01 /* FutureData.swift */; };
+		CCB36B0429038978009C2E01 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB36B0329038978009C2E01 /* Future.swift */; };
 		D990E9BE290387A10003335A /* FutureApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990E9BD290387A10003335A /* FutureApp.swift */; };
 		D990E9C0290387A10003335A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D990E9BF290387A10003335A /* ContentView.swift */; };
 		D990E9C2290387A20003335A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D990E9C1290387A20003335A /* Assets.xcassets */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CCB36B012903895F009C2E01 /* FutureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureData.swift; sourceTree = "<group>"; };
+		CCB36B0329038978009C2E01 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		D990E9BA290387A10003335A /* Future.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Future.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D990E9BD290387A10003335A /* FutureApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureApp.swift; sourceTree = "<group>"; };
 		D990E9BF290387A10003335A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -53,6 +57,8 @@
 			children = (
 				D990E9BD290387A10003335A /* FutureApp.swift */,
 				D990E9BF290387A10003335A /* ContentView.swift */,
+				CCB36B012903895F009C2E01 /* FutureData.swift */,
+				CCB36B0329038978009C2E01 /* Future.swift */,
 				D990E9C1290387A20003335A /* Assets.xcassets */,
 				D990E9C3290387A20003335A /* Preview Content */,
 			);
@@ -137,7 +143,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCB36B022903895F009C2E01 /* FutureData.swift in Sources */,
 				D990E9C0290387A10003335A /* ContentView.swift in Sources */,
+				CCB36B0429038978009C2E01 /* Future.swift in Sources */,
 				D990E9BE290387A10003335A /* FutureApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
