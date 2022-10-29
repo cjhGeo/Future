@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct editStreakDetail: View {
+struct EditStreakDetailView: View {
     
     @State private var date = Date()
     
@@ -16,6 +16,9 @@ struct editStreakDetail: View {
     @State var startingDate = ""
     @State var pin = false
     
+    @Binding var events: [Event]
+    
+    @Environment(\.dismiss) var dismiss
     
     
     var body: some View {
@@ -52,7 +55,10 @@ struct editStreakDetail: View {
                     }
                 }
             }
-            Button("Save Event"){}
+            Button("Save Event"){
+                events.append(Event(title: title, date: startingDate))
+                dismiss()
+            }
             
             
             
@@ -73,8 +79,8 @@ struct editStreakDetail: View {
 //        .datePickerStyle(.graphical)
 //    }
 
-struct editStreakDetail_Previews: PreviewProvider {
+struct EditStreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        editStreakDetail()
+        EditStreakDetailView(events: .constant([]))
     }
 }

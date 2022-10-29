@@ -9,7 +9,6 @@ import SwiftUI
 
 struct StreakDetailView: View {
     
-    @State var title = "Title"
     @State var tf = true
     
     @Binding var event: Event
@@ -17,7 +16,7 @@ struct StreakDetailView: View {
     var body: some View {
         VStack {
             Form {
-                TextField("Title of countdown", text: $title)
+                TextField("Title of countdown", text: $event.title)
                     .multilineTextAlignment(.center)
                 Section() {
                     ZStack {
@@ -36,9 +35,9 @@ struct StreakDetailView: View {
                             .cornerRadius(12)
                             .padding(.top)
                             .padding(.bottom)
-                            .onTapGesture {
-                                title = "Save"
-                            }
+//                            .onTapGesture {
+//
+//                            }
                         
                         Spacer()
                         
@@ -48,9 +47,9 @@ struct StreakDetailView: View {
                             .cornerRadius(12)
                             .padding(.top)
                             .padding(.bottom)
-                            .onTapGesture {
-                                title = "Share"
-                            }
+//                            .onTapGesture {
+//
+//                            }
                     }
                 }
             }

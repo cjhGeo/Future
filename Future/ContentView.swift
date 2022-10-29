@@ -67,12 +67,8 @@ struct ContentView: View {
                 .padding()
             }
             .frame(height: 600)
-            .navigationTitle("Welcome Back!")
+            .navigationTitle("Countdowns")
             .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    EditButton()
-                    // EditButton is a special thing to use directly
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {
                         isSheetPresented = true
@@ -80,6 +76,9 @@ struct ContentView: View {
                         Image(systemName: "plus")
                     }
                 }
+            }
+            .sheet(isPresented: $isSheetPresented) {
+                EditStreakDetailView(events: $events)
             }
         }
     }
