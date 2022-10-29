@@ -11,8 +11,6 @@ struct ContentView: View {
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    @State private var moves: [Move?] = Array(repeating: nil, count: 6)
-    
     @State var events = [
         Event(title: "Watch newest paw patrol release", date: "7 Oct", details: "new episode"),
         Event(title: "Dora's Birthday", date: "15 Aug"),
@@ -21,17 +19,6 @@ struct ContentView: View {
     @State var isSheetPresented = false
     
     //    @StateObject var todoManager = TodoManager()
-    
-    enum Player {
-        case human, computer
-    }
-    
-    struct Move {
-        let player: Player
-        let boardIndex: Int
-        
-        
-    }
     
     var body: some View {
         NavigationView{
