@@ -12,6 +12,8 @@ struct StreakDetailView: View {
     @State var title = "Title"
     @State var tf = true
     
+    @Binding var event: Event
+    
     var body: some View {
         VStack {
             Form {
@@ -58,6 +60,6 @@ struct StreakDetailView: View {
 
 struct StreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        StreakDetailView()
+        StreakDetailView(event: .constant(Event(title: "Title", date: "7 Oct")))
     }
 }

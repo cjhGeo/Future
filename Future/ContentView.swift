@@ -13,14 +13,14 @@ struct ContentView: View {
     
     @State private var moves: [Move?] = Array(repeating: nil, count: 6)
     
-    @State var todos = [
-        Todo(title: "Watch some paw patrol!", isCompleted: true, details: "Episode 5 - 10"),
-        Todo(title: "Pay attention to YJ in class"),
-        Todo(title: "Go get free points in giveaways")]
+    @State var events = [
+        Event(title: "Watch newest paw patrol release", date: "7 Oct", details: "new episode"),
+        Event(title: "Dora's Birthday", date: "15 Aug"),
+        Event(title: "Go get free points in giveaways", date: "")]
     
     @State var isSheetPresented = false
     
-    @StateObject var todoManager = TodoManager()
+    //    @StateObject var todoManager = TodoManager()
     
     enum Player {
         case human, computer
@@ -36,19 +36,18 @@ struct ContentView: View {
     var body: some View {
         NavigationView{
             
-            List {
-                ForEach($todoManager.todos) { $todo in
-                    NavigationLink{
-                        //                        ToDoDetailView(todo: $todo)
-                    } label: {
+            GeometryReader { geometry in
+                VStack {
+                    //                    Spacer()
+                    LazyVGrid(columns: columns, spacing: 50) {
                         
-                    }
-                }
-                GeometryReader { geometry in
-                    VStack {
-                        //                            Spacer()
-                        LazyVGrid(columns: columns, spacing: 20) {
-                            ForEach(0..<10) { i in
+                        ForEach($events) { $event in
+                            NavigationLink{
+                                StreakDetailView(event: $event)
+                            } label: {
+                                
+                                
+                                
                                 ZStack {
                                     Circle()
                                         .foregroundColor(.blue).opacity(0.5)
@@ -62,19 +61,12 @@ struct ContentView: View {
                                     
                                 }
                             }
-                            .onDelete { indexSet in
-                                todoManager.todos.remove(atOffsets: indexSet)
-                            }
-                            .onMove { indices, newOffset in
-                                todoManager.todos.move(fromOffsets: indices, toOffset: newOffset)
-                                
-                            }
                         }
-                        .padding()
                     }
                 }
-                .frame(height: 600)
+                .padding()
             }
+            .frame(height: 600)
             .navigationTitle("Welcome Back!")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

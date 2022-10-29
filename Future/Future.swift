@@ -8,10 +8,10 @@
 import Foundation
 
 
-struct Todo: Identifiable, Encodable, Decodable {
-    let id = UUID()
+struct Event: Identifiable, Encodable, Decodable {
+    var id = UUID()
     var title: String
-    var isCompleted = false
+    var date: String
     var details = ""
     
 }
