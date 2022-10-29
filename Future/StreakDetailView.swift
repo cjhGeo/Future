@@ -9,8 +9,6 @@ import SwiftUI
 
 struct StreakDetailView: View {
     
-    @State var tf = true
-    
     @Binding var event: Event
     
     var body: some View {
@@ -18,6 +16,18 @@ struct StreakDetailView: View {
             Form {
                 TextField("Title of countdown", text: $event.title)
                     .multilineTextAlignment(.center)
+                
+                HStack {
+                    
+                    TextField("Title of countdown", text: $event.date)
+                        .multilineTextAlignment(.center)
+                    
+                    Text("|")
+                    
+                    TextField("Title of countdown", text: $event.status)
+                        .multilineTextAlignment(.center)
+                }
+                
                 Section() {
                     ZStack {
                         Circle()
@@ -27,29 +37,20 @@ struct StreakDetailView: View {
                             .font(.system(size: 60))
                             .foregroundColor(.white)
                     }
-                    HStack() {
-        
-                        Text("Save")
-                            .frame(width: 120, height: 60)
-                            .background(.gray)
-                            .cornerRadius(12)
-                            .padding(.top)
-                            .padding(.bottom)
-//                            .onTapGesture {
-//
-//                            }
+                    
+                    HStack {
                         
                         Spacer()
                         
-                        Text("Share")
-                            .frame(width: 120, height: 60)
-                            .background(.gray)
-                            .cornerRadius(12)
-                            .padding(.top)
-                            .padding(.bottom)
-//                            .onTapGesture {
-//
-//                            }
+                        Button {
+                            
+                        } label: {
+                            Text("Save as image")
+                                .font(.system(size: 20))
+                        }
+                        
+                        Spacer()
+                        
                     }
                 }
             }
