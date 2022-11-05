@@ -12,8 +12,14 @@ struct Event: Identifiable, Encodable, Decodable {
     var id = UUID()
     var title: String
     var date: String
-    var status = "Yearly"
+    var status: RepeatType
     var details = ""
     
 }
 
+enum RepeatType: String, Codable{
+    case never = "Never"
+    case weekly = "Weekly"
+    case monthly = "Monthly"
+    case annually = "Annually"
+}

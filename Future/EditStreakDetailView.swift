@@ -1,12 +1,4 @@
-//
-//  editStreakDetail.swift
-//  Future
-//
-//  Created by hazh2025 on 22/10/22.
-//
-
 import SwiftUI
-
 
 struct EditStreakDetailView: View {
     
@@ -16,11 +8,12 @@ struct EditStreakDetailView: View {
     @State var startingDate = ""
     @State var pin = false
     
+    @State var repeats = ""
+
     @Binding var events: [Event]
     
     @Environment(\.dismiss) var dismiss
-    
-    
+
     var body: some View {
         
         VStack{
@@ -29,12 +22,10 @@ struct EditStreakDetailView: View {
                     TextField("Title", text: $title)
                         .multilineTextAlignment(.leading)
                 }
-                
                 Section{
                     TextField("Starting Date", text: $startingDate)
                         .multilineTextAlignment(.leading)
                 }
-                
                 Section{
                     HStack {
                         Button("Option"){print(1)}
@@ -54,30 +45,26 @@ struct EditStreakDetailView: View {
                             }
                     }
                 }
+                Section(header: Text("REPEATS")){
+                    Picker("Repeat", selection: $repeats) {
+                        Text("Never")
+                            .tag(RepeatType.never)
+                        Text("Weekly")
+                            .tag(RepeatType.weekly)
+                        Text("Monthly")
+                            .tag(RepeatType.monthly)
+                        Text("Annually")
+                            .tag(RepeatType.annually)
+                    }.pickerStyle(MenuPickerStyle())
+                }
             }
+            
             Button("Save Event"){
-                events.append(Event(title: title, date: startingDate))
-                dismiss()
+                
             }
-            
-            
-            
         }
-        //            Button("Pick A Date"){
-        //                pickADate()
-        //            }
-        
     }
-    
 }
-//func pickADate(){
-//        DatePicker(
-//                "Start Date",
-//                selection: $date,
-//                displayedComponents: [.date]
-//            )
-//        .datePickerStyle(.graphical)
-//    }
 
 struct EditStreakDetailView_Previews: PreviewProvider {
     static var previews: some View {

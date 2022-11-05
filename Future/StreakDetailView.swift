@@ -14,18 +14,24 @@ struct StreakDetailView: View {
     var body: some View {
         VStack {
             Form {
-                TextField("Title of countdown", text: $event.title)
+                Text(event.title)
                     .multilineTextAlignment(.center)
                 
                 HStack {
                     
-                    TextField("Title of countdown", text: $event.date)
-                        .multilineTextAlignment(.center)
+                    Section() {
+                        Text(event.date)
+                            .multilineTextAlignment(.center)
+                        
+                    }
                     
                     Text("|")
                     
-                    TextField("Title of countdown", text: $event.status)
-                        .multilineTextAlignment(.center)
+                    Section() {
+                        
+                        Text(event.status.rawValue)
+                            .multilineTextAlignment(.center)
+                    }
                 }
                 
                 Section() {
@@ -36,6 +42,19 @@ struct StreakDetailView: View {
                         Text("300 days")
                             .font(.system(size: 60))
                             .foregroundColor(.white)
+                        
+                        Circle()
+                            .stroke(lineWidth: 20.0)
+                            .opacity(0.3)
+                            .foregroundColor(Color.green)
+                            .frame(height: 314)
+                        
+                        Circle()
+                            .trim(from: 0.0, to: 60/360)
+                            .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
+                            .foregroundColor(Color.green)
+                            .rotationEffect(Angle(degrees: 270.0))
+                            .frame(height: 314)
                     }
                     
                     HStack {
@@ -60,6 +79,6 @@ struct StreakDetailView: View {
 
 struct StreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        StreakDetailView(event: .constant(Event(title: "Title", date: "7 Oct")))
+        StreakDetailView(event: .constant(Event(title: "Title", date: "7 Oct",  status: RepeatType.annually)))
     }
 }

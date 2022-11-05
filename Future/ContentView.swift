@@ -12,9 +12,9 @@ struct ContentView: View {
                                GridItem(.flexible())]
     
     @State var events = [
-        Event(title: "Watch newest paw patrol release", date: "7 Oct", details: "new episode"),
-        Event(title: "Dora's Birthday", date: "15 Aug"),
-        Event(title: "Go get free points in giveaways", date: "")]
+        Event(title: "Watch newest paw patrol release", date: "7 Oct", status: RepeatType.annually, details: "new episode"),
+        Event(title: "Dora's Birthday", date: "15 Aug", status: RepeatType.annually),
+        Event(title: "Go get free points in giveaways", date: "", status: RepeatType.annually)]
     
     @State var isSheetPresented = false
     
