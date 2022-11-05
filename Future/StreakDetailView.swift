@@ -53,7 +53,7 @@ struct StreakDetailView: View {
                             .frame(height: 270)
                         
                         Circle()
-                            .trim(from: 0.0, to: 60/360)
+                            .trim(from: 0.0, to: 60/100)
                             .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color.green)
                             .rotationEffect(Angle(degrees: 270.0))
