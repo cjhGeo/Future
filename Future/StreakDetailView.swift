@@ -43,24 +43,25 @@ struct StreakDetailView: View {
                 Section() {
                     ZStack {
                         Circle()
-                            .frame(height: 360)
-                            .foregroundColor(.gray)
-                        Text("300 days")
-                            .font(.system(size: 60))
-                            .foregroundColor(.white)
+                            .frame(height: 330)
+                            .opacity(0)
                         
                         Circle()
                             .stroke(lineWidth: 20.0)
                             .opacity(0.3)
                             .foregroundColor(Color.green)
-                            .frame(height: 314)
+                            .frame(height: 270)
                         
                         Circle()
                             .trim(from: 0.0, to: 60/360)
                             .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color.green)
                             .rotationEffect(Angle(degrees: 270.0))
-                            .frame(height: 314)
+                            .frame(height: 270)
+                        
+                        Text("300 days")
+                            .font(.system(size: 52))
+                            .foregroundColor(.black)
                     }
                     
                     HStack {
