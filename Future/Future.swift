@@ -11,7 +11,7 @@ import Foundation
 struct Event: Identifiable, Encodable, Decodable {
     var id = UUID()
     var title: String
-    var date: String
+    var date = Date()
     var status: RepeatType
     var details = ""
     

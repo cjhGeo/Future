@@ -2,18 +2,18 @@ import SwiftUI
 
 struct EditStreakDetailView: View {
     
-    @State private var date = Date()
+    @State var wakeUp = Date.now
     
     @State var title = ""
     @State var startingDate = ""
     @State var pin = false
     
     @State var repeats = ""
-
+    
     @Binding var events: [Event]
     
     @Environment(\.dismiss) var dismiss
-
+    
     var body: some View {
         
         VStack{
@@ -23,28 +23,13 @@ struct EditStreakDetailView: View {
                         .multilineTextAlignment(.leading)
                 }
                 Section{
-                    TextField("Starting Date", text: $startingDate)
-                        .multilineTextAlignment(.leading)
+                    
+                    @AppStorage("savedDate") var _: Date = Date()
+                    
+                    DatePicker("Date:", selection: $wakeUp, displayedComponents: .date)
+                        .datePickerStyle(GraphicalDatePickerStyle())
                 }
-                Section{
-                    HStack {
-                        Button("Option"){print(1)}
-                        
-                        Spacer()
-                        
-                        Text("Yes")
-                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                pin = true
-                            }
-                        Text("/")
-                        Text("No")
-                            .foregroundColor(.blue)
-                            .onTapGesture {
-                                pin = false
-                            }
-                    }
-                }
+                
                 Section(header: Text("REPEATS")){
                     Picker("Repeat", selection: $repeats) {
                         Text("Never")
@@ -60,7 +45,8 @@ struct EditStreakDetailView: View {
             }
             
             Button("Save Event"){
-                
+                events.append(Event(title: title, date: wakeUp, status: RepeatType.never))
+                dismiss()
             }
         }
     }

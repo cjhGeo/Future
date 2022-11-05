@@ -11,6 +11,12 @@ struct StreakDetailView: View {
     
     @Binding var event: Event
     
+    let dateFormatter: DateFormatter = {
+            let formatter = DateFormatter()
+            formatter.dateStyle = .long
+            return formatter
+        }()
+    
     var body: some View {
         VStack {
             Form {
@@ -20,7 +26,7 @@ struct StreakDetailView: View {
                 HStack {
                     
                     Section() {
-                        Text(event.date)
+                        Text(event.date, formatter: dateFormatter)
                             .multilineTextAlignment(.center)
                         
                     }
@@ -79,6 +85,6 @@ struct StreakDetailView: View {
 
 struct StreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        StreakDetailView(event: .constant(Event(title: "Title", date: "7 Oct",  status: RepeatType.annually)))
+        StreakDetailView(event: .constant(Event(title: "Title",  status: RepeatType.annually)))
     }
 }
