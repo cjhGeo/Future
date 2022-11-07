@@ -14,6 +14,8 @@ struct EditStreakDetailView: View {
     
     @Environment(\.dismiss) var dismiss
     
+    @State private var date = Date()
+    
     var body: some View {
         
         VStack{
@@ -22,12 +24,21 @@ struct EditStreakDetailView: View {
                     TextField("Title", text: $title)
                         .multilineTextAlignment(.leading)
                 }
+                
                 Section{
+                    Text("\(timePeriodTest().day!) Days Left")
+                        .font(.title)
                     
-                    @AppStorage("savedDate") var _: Date = Date()
-                    
-                    DatePicker("Date:", selection: $wakeUp, displayedComponents: .date)
+                }
+                
+                
+                if #available(iOS 14.0, *) {
+                    DatePicker("Choose the day", selection: $date)
                         .datePickerStyle(GraphicalDatePickerStyle())
+                        .frame(maxHeight: 400)
+                } else {
+                    DatePicker("Choose the day", selection: $date)
+                        .frame(maxHeight: 400)
                 }
                 
                 Section(header: Text("REPEATS")){
@@ -42,14 +53,31 @@ struct EditStreakDetailView: View {
                             .tag(RepeatType.annually)
                     }.pickerStyle(MenuPickerStyle())
                 }
-            }
-            
-            Button("Save Event"){
-                events.append(Event(title: title, date: wakeUp, status: RepeatType.never))
-                dismiss()
+                HStack {
+                    Spacer()
+                    
+                    Button("SAVE EVENT"){
+                        events.append(Event(title: title, date: wakeUp, status: RepeatType.never))
+                        dismiss()
+                    }
+                    .padding()
+
+                    Spacer()
+                }
             }
         }
     }
+   
+    func timePeriodTest() -> DateComponents {
+        let userDate = Calendar.current.dateComponents([.day, .month, .year], from: date)
+        
+        let userDateComponents = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day!).date!
+        
+        let daysUntil = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponents)
+        
+        return daysUntil
+    }
+    
 }
 
 struct EditStreakDetailView_Previews: PreviewProvider {
@@ -57,3 +85,4 @@ struct EditStreakDetailView_Previews: PreviewProvider {
         EditStreakDetailView(events: .constant([]))
     }
 }
+
