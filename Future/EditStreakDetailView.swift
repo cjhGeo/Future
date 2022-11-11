@@ -28,7 +28,7 @@ struct EditStreakDetailView: View {
                 Section{
                     Text("\(timePeriodTest().day!) Days Left")
                         .font(.body)
-                    
+                     
                 }
                 
                 
