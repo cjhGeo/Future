@@ -28,7 +28,7 @@ struct EditStreakDetailView: View {
                 Section{
                     Text("\(timePeriodTest().day!) Days Left")
                         .font(.body)
-                     
+                    
                 }
                 
                 
@@ -61,13 +61,13 @@ struct EditStreakDetailView: View {
                         dismiss()
                     }
                     .padding()
-
+                    
                     Spacer()
                 }
             }
         }
     }
-   
+    
     func timePeriodTest() -> DateComponents {
         let userDate = Calendar.current.dateComponents([.day, .month, .year], from: date)
         
@@ -75,14 +75,16 @@ struct EditStreakDetailView: View {
         
         let daysUntil = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponents)
         
+        
         return daysUntil
+        
+        
+        
+        struct EditStreakDetailView_Previews: PreviewProvider {
+            static var previews: some View {
+                EditStreakDetailView(events: .constant([]))
+            }
+        }
+        
     }
-    
 }
-
-struct EditStreakDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        EditStreakDetailView(events: .constant([]))
-    }
-}
-

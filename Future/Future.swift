@@ -14,6 +14,7 @@ struct Event: Identifiable, Encodable, Decodable {
     var date = Date()
     var status: RepeatType
     var details = ""
+    var isCompleted = false 
     
 }
 

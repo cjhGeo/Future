@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Future
-//
-//  Created by T Krobot on 22/10/22.
-//
-
 import SwiftUI
 
 struct ContentView: View {
@@ -33,11 +26,10 @@ struct ContentView: View {
                                 StreakDetailView(event: $event)
                             } label: {
                                 
-                                
-                                
                                 ZStack {
                                     Circle()
-                                        .foregroundColor(.blue).opacity(0.5)
+                                        .foregroundColor(event.isCompleted ? .green : .blue)
+                                        .opacity(0.5)
                                         .frame(width: geometry.size.width/3 - 15 ,
                                                height: geometry.size.width/3 - 15)
                                     
@@ -78,3 +70,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

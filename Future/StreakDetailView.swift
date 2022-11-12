@@ -80,6 +80,21 @@ struct StreakDetailView: View {
                     }
                 }
             }
+            Section{
+                Button{
+                    withAnimation{
+                        event.isCompleted.toggle()
+                    }
+                } label: {
+                    Text("Mark as \(event.isCompleted ? "Incompleted" : "Completed")")
+                        .foregroundColor(event.isCompleted ? .red : .green)
+                       
+                }
+               
+           
+                
+                Spacer()
+            }
         }
     }
 }
@@ -89,3 +104,4 @@ struct StreakDetailView_Previews: PreviewProvider {
         StreakDetailView(event: .constant(Event(title: "Title",  status: RepeatType.annually)))
     }
 }
+
