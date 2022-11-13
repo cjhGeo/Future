@@ -18,7 +18,7 @@ struct ContentView: View {
             
             GeometryReader { geometry in
                 VStack {
-                    //                    Spacer()
+                    
                     LazyVGrid(columns: columns, spacing: 50) {
                         
                         ForEach($events) { $event in
