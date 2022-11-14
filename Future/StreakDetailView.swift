@@ -3,16 +3,26 @@
 //  Future
 //
 //  Created by T Krobot on 22/10/22.
-//
+
+
+
 
 import SwiftUI
 
 struct StreakDetailView: View {
     
-    @Binding var event: Event
+    @Binding var events: Event
     
     @State private var showRequest = true
     @State var LocalNotificationView = false
+    
+    @State var wakeUp = Date.now
+    @State var title = ""
+    @State var startingDate = ""
+    @State var pin = false
+    @State var repeats = ""
+//    @Binding var events: [Event]
+    @Environment(\.dismiss) var dismiss
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -27,12 +37,12 @@ struct StreakDetailView: View {
     var body: some View {
         VStack {
             Form {
-                Text(event.title)
+                Text(events.title)
                     .multilineTextAlignment(.center)
                 HStack {
                     
                     Section() {
-                        Text(event.date, formatter: dateFormatter)
+                        Text(events.date, formatter: dateFormatter)
                             .multilineTextAlignment(.center)
                     }
                     
@@ -40,7 +50,7 @@ struct StreakDetailView: View {
                     
                     Section() {
                         
-                        Text(event.status.rawValue)
+                        Text(events.status.rawValue)
                             .multilineTextAlignment(.center)
                     }
                 }
@@ -79,41 +89,64 @@ struct StreakDetailView: View {
                         Spacer()
                     }
                 }
- 
+                
                 VStack{
                     Section{
                         Toggle("Notifications", isOn: $showRequest)
                             .toggleStyle(SwitchToggleStyle(tint: .red))
                     }
-//                    if showRequest {
-//                        LocalNotificationView() = true
-//                    }
+                    //                    if showRequest {
+                    //                        LocalNotificationView() = true
+                    //                    }
                 }
                 
-
                 
                 
-                HStack {
-                    Section{
+                
+                Section {
+                    HStack {
                         Spacer()
                         
                         Button{
                             withAnimation{
-                                event.isCompleted.toggle()
+                                events.isCompleted.toggle()
                             }
                         } label: {
-                            Text("Mark as \(event.isCompleted ? "Incompleted" : "Completed")")
-                                .foregroundColor(event.isCompleted ? .red : .green)
+                            Text("Mark as \(events.isCompleted ? "Incompleted" : "Completed")")
+                                .foregroundColor(events.isCompleted ? .red : .blue)
                         }
+                        Spacer()
+                        
+                    }
+                    HStack{
+                        Spacer()
+                        
+                        Button{
+                           // $events.items.remove(Event(title: title, date: wakeUp, status: RepeatType.never))
+                            dismiss()
+                        } label: {
+                            Text("DELETE EVENT")
+                                .foregroundColor(.red)
+                            
+                        }
+                        
                         Spacer()
                     }
                 }
+                
+                
+            }
+        }
+       
+    }
+   
+    
+
+        struct StreakDetailView_Previews: PreviewProvider {
+            static var previews: some View {
+                StreakDetailView (events: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
             }
         }
     }
-    struct StreakDetailView_Previews: PreviewProvider {
-        static var previews: some View {
-            StreakDetailView(event: .constant(Event(title: "Title",  status: RepeatType.annually)))
-        }
-    }
-}
+    
+
