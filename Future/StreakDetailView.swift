@@ -11,24 +11,29 @@ struct StreakDetailView: View {
     
     @Binding var event: Event
     
+    @State private var showRequest = true
+    @State var LocalNotificationView = false
+    
     let dateFormatter: DateFormatter = {
-            let formatter = DateFormatter()
-            formatter.dateStyle = .long
-            return formatter
-        }()
+        let formatter = DateFormatter()
+        formatter.dateStyle = .long
+        return formatter
+    }()
+    
+    //    if showRequest = true {
+    //        LocalNotificationView() = true
+    //    }
     
     var body: some View {
         VStack {
             Form {
                 Text(event.title)
                     .multilineTextAlignment(.center)
-                
                 HStack {
                     
                     Section() {
                         Text(event.date, formatter: dateFormatter)
                             .multilineTextAlignment(.center)
-                        
                     }
                     
                     Text("|")
@@ -65,43 +70,50 @@ struct StreakDetailView: View {
                     }
                     
                     HStack {
-                        
                         Spacer()
-                        
                         Button {
-                            
                         } label: {
                             Text("Save as image")
                                 .font(.system(size: 20))
                         }
-                        
+                        Spacer()
+                    }
+                }
+ 
+                VStack{
+                    Section{
+                        Toggle("Notifications", isOn: $showRequest)
+                            .toggleStyle(SwitchToggleStyle(tint: .red))
+                    }
+//                    if showRequest {
+//                        LocalNotificationView() = true
+//                    }
+                }
+                
+
+                
+                
+                HStack {
+                    Section{
                         Spacer()
                         
+                        Button{
+                            withAnimation{
+                                event.isCompleted.toggle()
+                            }
+                        } label: {
+                            Text("Mark as \(event.isCompleted ? "Incompleted" : "Completed")")
+                                .foregroundColor(event.isCompleted ? .red : .green)
+                        }
+                        Spacer()
                     }
                 }
-            }
-            Section{
-                Button{
-                    withAnimation{
-                        event.isCompleted.toggle()
-                    }
-                } label: {
-                    Text("Mark as \(event.isCompleted ? "Incompleted" : "Completed")")
-                        .foregroundColor(event.isCompleted ? .red : .green)
-                       
-                }
-               
-           
-                
-                Spacer()
             }
         }
     }
-}
-
-struct StreakDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        StreakDetailView(event: .constant(Event(title: "Title",  status: RepeatType.annually)))
+    struct StreakDetailView_Previews: PreviewProvider {
+        static var previews: some View {
+            StreakDetailView(event: .constant(Event(title: "Title",  status: RepeatType.annually)))
+        }
     }
 }
-

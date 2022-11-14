@@ -16,6 +16,9 @@ struct EditStreakDetailView: View {
     
     @State private var date = Date()
     
+    @State private var showRequest = true
+    @State var LocalNotificationView = false
+    
     var body: some View {
         
         VStack{
@@ -41,7 +44,7 @@ struct EditStreakDetailView: View {
                         .frame(maxHeight: 400)
                 }
                 
-                Section(header: Text("REPEATS")){
+                Section{
                     Picker("Repeat", selection: $repeats) {
                         Text("Never")
                             .tag(RepeatType.never)
@@ -53,6 +56,16 @@ struct EditStreakDetailView: View {
                             .tag(RepeatType.annually)
                     }.pickerStyle(MenuPickerStyle())
                 }
+                
+//                                Section {
+//                                    Toggle("Notifictions", isOn: $showRequest)
+//                                        .toggleStyle(SwitchToggleStyle(tint: .red))
+//                                }
+//                
+//                                           if showRequest {
+//                                               LocalNotificationView() = true
+//                                           }
+                
                 HStack {
                     Spacer()
                     
@@ -60,7 +73,7 @@ struct EditStreakDetailView: View {
                         events.append(Event(title: title, date: wakeUp, status: RepeatType.never))
                         dismiss()
                     }
-                    .padding()
+                    //                    .padding()
                     
                     Spacer()
                 }
@@ -78,13 +91,15 @@ struct EditStreakDetailView: View {
         
         return daysUntil
         
-        
+    }
+}
+
         
         struct EditStreakDetailView_Previews: PreviewProvider {
             static var previews: some View {
                 EditStreakDetailView(events: .constant([]))
+                
             }
         }
         
-    }
-}
+ 
