@@ -4,7 +4,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            IncompleteView()
+            CountdownsView()
                 .tabItem {
                     Label("Countdowns", systemImage: "checkmark.circle.fill")
                 }
