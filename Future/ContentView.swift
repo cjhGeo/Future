@@ -6,7 +6,7 @@ struct ContentView: View {
         TabView {
             CountdownsView()
                 .tabItem {
-                    Label("Countdowns", systemImage: "checkmark.circle.fill")
+                    Label("Scheduled", systemImage: "checkmark.circle.fill")
                 }
             CompletedView()
                 .tabItem {

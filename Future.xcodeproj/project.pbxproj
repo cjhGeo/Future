@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CC5033502924B26A00857C37 /* RepeatStreaks.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC50334F2924B26A00857C37 /* RepeatStreaks.swift */; };
 		CCB36B022903895F009C2E01 /* FutureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB36B012903895F009C2E01 /* FutureData.swift */; };
 		CCB36B0429038978009C2E01 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB36B0329038978009C2E01 /* Future.swift */; };
 		CCB36B90292099C7009C2E01 /* LocalNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB36B8F292099C7009C2E01 /* LocalNotifications.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CC50334F2924B26A00857C37 /* RepeatStreaks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatStreaks.swift; sourceTree = "<group>"; };
 		CCB36B012903895F009C2E01 /* FutureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FutureData.swift; sourceTree = "<group>"; };
 		CCB36B0329038978009C2E01 /* Future.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
 		CCB36B8F292099C7009C2E01 /* LocalNotifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotifications.swift; sourceTree = "<group>"; };
@@ -73,6 +75,7 @@
 				CCB36B012903895F009C2E01 /* FutureData.swift */,
 				CCB36B0329038978009C2E01 /* Future.swift */,
 				D990E9CF29039A410003335A /* StreakDetailView.swift */,
+				CC50334F2924B26A00857C37 /* RepeatStreaks.swift */,
 				D990E9D129039F720003335A /* EditStreakDetailView.swift */,
 				D990E9C1290387A20003335A /* Assets.xcassets */,
 				D990E9C3290387A20003335A /* Preview Content */,
@@ -162,6 +165,7 @@
 				CCB36B90292099C7009C2E01 /* LocalNotifications.swift in Sources */,
 				D990E9C0290387A10003335A /* ContentView.swift in Sources */,
 				CCB36B0429038978009C2E01 /* Future.swift in Sources */,
+				CC5033502924B26A00857C37 /* RepeatStreaks.swift in Sources */,
 				D9BB6C3B292487EA00D38BE9 /* CompletedView.swift in Sources */,
 				D990E9D029039A410003335A /* StreakDetailView.swift in Sources */,
 				D990E9BE290387A10003335A /* FutureApp.swift in Sources */,

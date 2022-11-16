@@ -50,9 +50,8 @@ struct EditStreakDetailView: View {
                 
                 Section{
                     HStack {
-                        Text("Colour:")
                         
-                        Picker("Colour", selection: $colours) {
+                        Picker("Colour:", selection: $colours) {
                             Text("Red")
                                 .tag("red")
                             Text("Green")
