@@ -21,7 +21,8 @@ struct StreakDetailView: View {
     @State var startingDate = ""
     @State var pin = false
     @State var repeats = ""
-//    @Binding var events: [Event]
+    
+    
     @Environment(\.dismiss) var dismiss
     
     let dateFormatter: DateFormatter = {

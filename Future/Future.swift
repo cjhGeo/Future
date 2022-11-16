@@ -14,8 +14,8 @@ struct Event: Identifiable, Encodable, Decodable {
     var date = Date()
     var status: RepeatType
     var details = ""
-    var isCompleted = false 
-    
+    var isCompleted = false
+    var colour = "blue"
 }
 
 enum RepeatType: String, Codable{

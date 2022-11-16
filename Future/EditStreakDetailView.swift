@@ -10,7 +10,11 @@ struct EditStreakDetailView: View {
     
     @State var repeats = ""
     
+    @State var colours = ""
+    
     @Binding var events: [Event]
+    
+    
     
     @Environment(\.dismiss) var dismiss
     
@@ -45,6 +49,21 @@ struct EditStreakDetailView: View {
                 }
                 
                 Section{
+                    HStack {
+                        Text("Colour:")
+                        
+                        Picker("Colour", selection: $colours) {
+                            Text("Red")
+                                .tag("red")
+                            Text("Green")
+                                .tag("green")
+                            Text("Blue")
+                                .tag("blue")
+                        }.pickerStyle(MenuPickerStyle())
+                    }
+                }
+                
+                Section{
                     Picker("Repeat", selection: $repeats) {
                         Text("Never")
                             .tag(RepeatType.never)
@@ -57,20 +76,20 @@ struct EditStreakDetailView: View {
                     }.pickerStyle(MenuPickerStyle())
                 }
                 
-//                                Section {
-//                                    Toggle("Notifictions", isOn: $showRequest)
-//                                        .toggleStyle(SwitchToggleStyle(tint: .red))
-//                                }
-//                
-//                                           if showRequest {
-//                                               LocalNotificationView() = true
-//                                           }
+                //                                Section {
+                //                                    Toggle("Notifictions", isOn: $showRequest)
+                //                                        .toggleStyle(SwitchToggleStyle(tint: .red))
+                //                                }
+                //
+                //                                           if showRequest {
+                //                                               LocalNotificationView() = true
+                //                                           }
                 
                 HStack {
                     Spacer()
                     
                     Button("SAVE EVENT"){
-                        events.append(Event(title: title, date: wakeUp, status: RepeatType.never))
+                        events.append(Event(title: title, date: wakeUp, status: RepeatType.never, colour: colours))
                         dismiss()
                     }
                     //                    .padding()
@@ -94,12 +113,12 @@ struct EditStreakDetailView: View {
     }
 }
 
+
+struct EditStreakDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        EditStreakDetailView(events: .constant([]))
         
-        struct EditStreakDetailView_Previews: PreviewProvider {
-            static var previews: some View {
-                EditStreakDetailView(events: .constant([]))
-                
-            }
-        }
-        
- 
+    }
+}
+
+
