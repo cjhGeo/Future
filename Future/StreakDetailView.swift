@@ -56,6 +56,21 @@ struct StreakDetailView: View {
                     }
                 }
                 
+                VStack{
+                    Section{
+                        Toggle("Notifications", isOn: $showRequest)
+                            .toggleStyle(SwitchToggleStyle(tint: .red))
+                    }
+                    //                    if showRequest {
+                    //                        LocalNotificationView() = true
+                    //                    }
+                }
+
+
+
+
+                   
+                
                 Section() {
                     ZStack {
                         Circle()
@@ -91,23 +106,23 @@ struct StreakDetailView: View {
                     }
                 }
                 
-                VStack{
-                    Section{
-                        Toggle("Notifications", isOn: $showRequest)
-                            .toggleStyle(SwitchToggleStyle(tint: .red))
-                    }
-                    //                    if showRequest {
-                    //                        LocalNotificationView() = true
-                    //                    }
-                }
-                
-                
-                
-                
+//                VStack{
+//                    Section{
+//                        Toggle("Notifications", isOn: $showRequest)
+//                            .toggleStyle(SwitchToggleStyle(tint: .red))
+//                    }
+//                    //                    if showRequest {
+//                    //                        LocalNotificationView() = true
+//                    //                    }
+//                }
+//
+//
+//
+
                 Section {
                     HStack {
                         Spacer()
-                        
+
                         Button{
                             withAnimation{
                                 events.isCompleted.toggle()
@@ -117,20 +132,20 @@ struct StreakDetailView: View {
                                 .foregroundColor(events.isCompleted ? .red : .blue)
                         }
                         Spacer()
-                        
+
                     }
                     HStack{
                         Spacer()
-                        
+
                         Button{
                            // $events.items.remove(Event(title: title, date: wakeUp, status: RepeatType.never))
                             dismiss()
                         } label: {
-                            Text("DELETE EVENT")
+                            Text("Delete Event")
                                 .foregroundColor(.red)
-                            
+
                         }
-                        
+
                         Spacer()
                     }
                 }
