@@ -4,7 +4,7 @@ import SwiftUI
 struct ContentView: View {
     
     @State var events = [
-        Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode"),
+        Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode", isCompleted: true),
         Event(title: "Dora's Birthday", status: RepeatType.annually),
         Event(title: "Go get free points in giveaways", status: RepeatType.annually)]
     
