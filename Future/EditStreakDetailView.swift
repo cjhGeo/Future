@@ -87,7 +87,7 @@ struct EditStreakDetailView: View {
                 HStack {
                     Spacer()
                     
-                    Button("SAVE EVENT"){
+                    Button("Save Event"){
                         events.append(Event(title: title, date: wakeUp, status: RepeatType.never, colour: colours))
                         dismiss()
                     }
@@ -119,5 +119,3 @@ struct EditStreakDetailView_Previews: PreviewProvider {
         
     }
 }
-
-
