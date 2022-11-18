@@ -12,7 +12,7 @@ struct ContentView: View {
         TabView {
             CountdownsView(events: $events)
                 .tabItem {
-                    Label("Countdowns", systemImage: "checkmark.circle.fill")
+                    Label("Scheduled", systemImage: "checkmark.circle.fill")
                 }
             CompletedView(events: $events)
                 .tabItem {

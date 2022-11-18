@@ -43,3 +43,5 @@ struct LocalNotificationView_Previews: PreviewProvider {
     }
 }
 
+
+//1) make the circular progress view smaller  2) add in delete button, then once pressed it will show a list 3) make all the fonts the same size

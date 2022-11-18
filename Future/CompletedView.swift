@@ -16,6 +16,8 @@ struct CompletedView: View {
     
     //    @StateObject var todoManager = TodoManager()
     
+    @State var streakCompleted = false
+    
     var body: some View {
         NavigationView{
             
@@ -47,7 +49,8 @@ struct CompletedView: View {
                 .padding()
             }
             .frame(height: 600)
-            .navigationTitle("Completed Countdowns")
+            .navigationTitle("Completed")
+            
             
             
             //else {
