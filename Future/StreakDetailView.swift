@@ -16,12 +16,11 @@ struct StreakDetailView: View {
     @State private var showRequest = true
     @State var LocalNotificationView = false
     
-    @State var wakeUp = Date.now
+    @State var currDate = Date.now
     @State var title = ""
     @State var startingDate = ""
     @State var pin = false
     @State var repeats = ""
-    
     
     @Environment(\.dismiss) var dismiss
     
@@ -97,7 +96,7 @@ struct StreakDetailView: View {
                                 .rotationEffect(Angle(degrees: 270.0))
                                 .frame(height: 270)
                             
-                            Text("300 days")
+                            Text()
                                 .font(.system(size: 52))
                                 .foregroundColor(.black)
                         }
@@ -140,20 +139,6 @@ struct StreakDetailView: View {
                             }
                             Spacer()
                             
-                        }
-                        HStack{
-                            Spacer()
-                            
-                            Button{
-                                // $events.items.remove(Event(title: title, date: wakeUp, status: RepeatType.never))
-                                dismiss()
-                            } label: {
-                                Text("Delete Event")
-                                    .foregroundColor(.red)
-                                
-                            }
-                            
-                            Spacer()
                         }
                     }
                     

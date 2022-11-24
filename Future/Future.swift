@@ -16,6 +16,7 @@ struct Event: Identifiable, Encodable, Decodable {
     var details = ""
     var isCompleted = false
     var colour = "blue"
+    var distance = 0.0
 }
 
 enum RepeatType: String, Codable{

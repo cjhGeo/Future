@@ -2,7 +2,7 @@ import SwiftUI
 
 struct EditStreakDetailView: View {
     
-    @State var wakeUp = Date.now
+    @State var currDate = Date.now
     
     @State var title = ""
     @State var startingDate = ""
@@ -14,6 +14,7 @@ struct EditStreakDetailView: View {
     
     @Binding var events: [Event]
     
+    @State var distance = 0.0
     
     
     @Environment(\.dismiss) var dismiss
@@ -88,7 +89,9 @@ struct EditStreakDetailView: View {
                     Spacer()
                     
                     Button("Save Event"){
-                        events.append(Event(title: title, date: wakeUp, status: RepeatType.never, colour: colours))
+                        distance = currDate.distance(to: date)
+                        
+                        events.append(Event(title: title, date: date, status: RepeatType.never, colour: colours, distance: distance))
                         dismiss()
                     }
                     //                    .padding()
