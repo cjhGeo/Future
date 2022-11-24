@@ -107,7 +107,7 @@ struct StreakDetailView: View {
                             Button {
                             } label: {
                                 Text("Save as image")
-                                    .font(.system(size: 20))
+                                    .foregroundColor(.blue)
                             }
                             Spacer()
                         }
