@@ -21,6 +21,8 @@ struct CountdownsView: View {
     
     @State var presentation = true
     
+    
+    
     //    @StateObject var todoManager = TodoManager()
     
     var body: some View {
@@ -51,7 +53,7 @@ struct CountdownsView: View {
                                             if event.title.count < 17 {
                                                 Text(event.title)
                                             } else {
-                                                Text("\(event.title.substring()...")
+                                                Text("\(event.title.substring(toIndex: 15))...")
                                             }
                                         }
                                     }
