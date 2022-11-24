@@ -96,7 +96,7 @@ struct StreakDetailView: View {
                             .rotationEffect(Angle(degrees: 270.0))
                             .frame(height: 270)
                         
-                        Text("\((timePeriodTest().day!)) Days Left")
+                        Text("\(timePeriodTest().day!) Days Left")
                             .font(.system(size: 52))
                             .foregroundColor(.black)
                     }
@@ -158,7 +158,7 @@ struct StreakDetailView: View {
         
         let userDateComponentsTwo = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day! + 1).date!
         
-        var daysUntilButNot = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponentsTwo)
+        let daysUntilButNot = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponentsTwo)
         
         if userDateComponents != Date() {
             daysUntil = daysUntilButNot

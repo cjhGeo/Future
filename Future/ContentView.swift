@@ -10,7 +10,7 @@ struct ContentView: View {
     
     var body: some View {
         TabView {
-            CountdownsView(events: $events)
+            CountdownsView(events: $events, eventsTwo: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
                 .tabItem {
                     Label("Scheduled", systemImage: "checkmark.circle.fill")
                 }

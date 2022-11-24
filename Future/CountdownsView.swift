@@ -13,6 +13,8 @@ struct CountdownsView: View {
     
     @Binding var events: [Event]
     
+    @Binding var eventsTwo: Event
+    
     @State var isSheetPresented = false
     
     @State var scam = false
@@ -20,6 +22,8 @@ struct CountdownsView: View {
     @State var editMode = EditMode.active
     
     @State var presentation = true
+    
+    let endOfSmth = "."
     
     
     
@@ -45,10 +49,9 @@ struct CountdownsView: View {
                                                     .frame(width: geometry.size.width/3 - 15 ,
                                                            height: geometry.size.width/3 - 15)
                                                 
-                                                Image(systemName: "pencil.circle.fill")
-                                                    .resizable()
-                                                    .frame(width: 40, height: 40)
-                                                    .foregroundColor(.white)
+                                                Text("\(calcDistance(eventsTwo.distance))")
+                                                    .foregroundColor(.black)
+                                                    .font(.system(size: 50))
                                             }
                                             if event.title.count < 17 {
                                                 Text(event.title)
@@ -128,10 +131,49 @@ struct CountdownsView: View {
             // }
         }
     }
+    
+    func calcDistance(_ dist: Double) -> Int {
+        var result = 0
+        if dist/86400 > 1 {
+            result = Int(dist/86400) + 1
+        } else if dist/3600 > 1 {
+            result = Int(dist/3600) + 1
+        } else if dist/60 > 1 {
+            result = Int(dist/60) + 1
+        } else {
+            result = Int(dist)
+        }
+        
+        return result
+    }
+    
+    
+    func timePeriodTest() -> DateComponents {
+        let userDate = Calendar.current.dateComponents([.day, .month, .year], from: eventsTwo.date)
+        
+        let userDateComponents = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day!).date!
+        
+        var daysUntil = Calendar.current.dateComponents([.day], from: userDateComponents, to: Date())
+        
+        
+        let userDateComponentsTwo = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day! + 1).date!
+        
+        let daysUntilButNot = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponentsTwo)
+        
+        if userDateComponents != Date() {
+            daysUntil = daysUntilButNot
+        }
+        
+        return daysUntil
+        
+    }
 }
 
 struct CountdownsView_Previews: PreviewProvider {
     static var previews: some View {
-        CountdownsView(events: .constant([Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")]))
+        CountdownsView(events: .constant([Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")]),
+                       
+                       eventsTwo: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
+        
     }
 }

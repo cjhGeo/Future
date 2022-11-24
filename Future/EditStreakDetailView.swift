@@ -89,7 +89,7 @@ struct EditStreakDetailView: View {
                     Spacer()
                     
                     Button("Save Event"){
-                        distance = currDate.distance(to: date)
+                    distance = currDate.distance(to: date)
                         
                         events.append(Event(title: title, date: date, status: RepeatType.never, colour: colours, distance: distance))
                         dismiss()
@@ -113,7 +113,7 @@ struct EditStreakDetailView: View {
         
         let userDateComponentsTwo = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day! + 1).date!
         
-        var daysUntilButNot = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponentsTwo)
+        let daysUntilButNot = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponentsTwo)
         
         if userDateComponents != Date() {
             daysUntil = daysUntilButNot
