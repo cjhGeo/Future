@@ -49,7 +49,7 @@ struct CountdownsView: View {
                                                     .frame(width: geometry.size.width/3 - 15 ,
                                                            height: geometry.size.width/3 - 15)
                                                 
-                                                Text("\(calcDistance(eventsTwo.distance))")
+                                                Text("\(calcDistance(event.distance))")
                                                     .foregroundColor(.black)
                                                     .font(.system(size: 50))
                                             }

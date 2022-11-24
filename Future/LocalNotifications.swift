@@ -23,10 +23,10 @@ struct LocalNotificationView: View {
             Button("Scheduled Notification") {
                 let content = UNMutableNotificationContent()
                 content.title = "Check Your Streak's Progress!"
-                content.subtitle = "Click here to repeat the Streak"
+                content.subtitle = "Click here to repeat the Streak!"
                 content.sound = UNNotificationSound.default
                 
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 86400, repeats: true)
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                 

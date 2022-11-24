@@ -18,6 +18,10 @@ struct ContentView: View {
                 .tabItem {
                     Label("Completed", systemImage: "number.circle")
                 }
+            LocalNotificationView()
+                .tabItem {
+                    Label("Notifications test", systemImage: "bell")
+                }
         }
     }
 }
