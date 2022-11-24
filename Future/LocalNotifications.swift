@@ -25,8 +25,9 @@ struct LocalNotificationView: View {
                 content.title = "Check Your Streak's Progress!"
                 content.subtitle = "Click here to repeat the Streak!"
                 content.sound = UNNotificationSound.default
+                content.interruptionLevel = .critical
                 
-                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 30, repeats: false)
+                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
                 
                 let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
                 
