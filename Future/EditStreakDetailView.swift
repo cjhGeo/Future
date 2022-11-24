@@ -10,7 +10,7 @@ struct EditStreakDetailView: View {
     
     @State var repeats = ""
     
-    @State var colours = ""
+    @State var colours = "red"
     
     @Binding var events: [Event]
     
@@ -107,9 +107,17 @@ struct EditStreakDetailView: View {
         
         let userDateComponents = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day!).date!
         
-        let daysUntil = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponents)
+        var daysUntil = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponents)
         
         
+        
+        let userDateComponentsTwo = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day! + 1).date!
+        
+        var daysUntilButNot = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponentsTwo)
+        
+        if userDateComponents != Date() {
+            daysUntil = daysUntilButNot
+        }
         return daysUntil
         
     }

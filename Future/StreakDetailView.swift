@@ -55,105 +55,126 @@ struct StreakDetailView: View {
                     }
                 }
                 
-//                VStack{
-//                    Section{
-//                        Button {
-//                            LocalNotificationView()
-//                        } label: {
-//                            Text("Notifications")
-//                        }
-//                    }
-//                }
-//                                            Toggle("Notifications", isOn: $showRequest)
-//                                                .toggleStyle(SwitchToggleStyle(tint: .red))
-//                                        }
-//                                        if showRequest = true  {
-//                                           LocalNotificationView()
-//                                        }
-//                                    }
-                    
-                    
-                    
-                    
-                    
-                    
-                    Section() {
-                        ZStack {
-                            Circle()
-                                .frame(height: 330)
-                                .opacity(0)
-                            
-                            Circle()
-                                .stroke(lineWidth: 20.0)
-                                .opacity(0.3)
-                                .foregroundColor(Color.green)
-                                .frame(height: 270)
-                            
-                            Circle()
-                                .trim(from: 0.0, to: 60/100)
-                                .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
-                                .foregroundColor(Color.green)
-                                .rotationEffect(Angle(degrees: 270.0))
-                                .frame(height: 270)
-                            
-                            Text()
-                                .font(.system(size: 52))
-                                .foregroundColor(.black)
-                        }
+                //                VStack{
+                //                    Section{
+                //                        Button {
+                //                            LocalNotificationView()
+                //                        } label: {
+                //                            Text("Notifications")
+                //                        }
+                //                    }
+                //                }
+                //                                            Toggle("Notifications", isOn: $showRequest)
+                //                                                .toggleStyle(SwitchToggleStyle(tint: .red))
+                //                                        }
+                //                                        if showRequest = true  {
+                //                                           LocalNotificationView()
+                //                                        }
+                //                                    }
+                
+                
+                
+                
+                
+                
+                Section() {
+                    ZStack {
+                        Circle()
+                            .frame(height: 330)
+                            .opacity(0)
                         
-                        HStack {
-                            Spacer()
-                            Button {
-                            } label: {
-                                Text("Save as image")
-                                    .foregroundColor(.blue)
-                            }
-                            Spacer()
-                        }
+                        Circle()
+                            .stroke(lineWidth: 20.0)
+                            .opacity(0.3)
+                            .foregroundColor(Color.green)
+                            .frame(height: 270)
+                        
+                        Circle()
+                            .trim(from: 0.0, to: 60/100)
+                            .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
+                            .foregroundColor(Color.green)
+                            .rotationEffect(Angle(degrees: 270.0))
+                            .frame(height: 270)
+                        
+                        Text("\((timePeriodTest().day!)) Days Left")
+                            .font(.system(size: 52))
+                            .foregroundColor(.black)
                     }
                     
-                    //                VStack{
-                    //                    Section{
-                    //                        Toggle("Notifications", isOn: $showRequest)
-                    //                            .toggleStyle(SwitchToggleStyle(tint: .red))
-                    //                    }
-                    //                    //                    if showRequest {
-                    //                    //                        LocalNotificationView() = true
-                    //                    //                    }
-                    //                }
-                    //
-                    //
-                    //
-                    
-                    Section {
-                        HStack {
-                            Spacer()
-                            
-                            Button{
-                                withAnimation{
-                                    events.isCompleted.toggle()
-                                }
-                            } label: {
-                                Text("Mark as \(events.isCompleted ? "Incompleted" : "Completed")")
-                                    .foregroundColor(events.isCompleted ? .red : .blue)
-                            }
-                            Spacer()
-                            
+                    HStack {
+                        Spacer()
+                        Button {
+                        } label: {
+                            Text("Save as image")
+                                .foregroundColor(.blue)
                         }
+                        Spacer()
                     }
-                    
-                    
                 }
+                
+                //                VStack{
+                //                    Section{
+                //                        Toggle("Notifications", isOn: $showRequest)
+                //                            .toggleStyle(SwitchToggleStyle(tint: .red))
+                //                    }
+                //                    //                    if showRequest {
+                //                    //                        LocalNotificationView() = true
+                //                    //                    }
+                //                }
+                //
+                //
+                //
+                
+                Section {
+                    HStack {
+                        Spacer()
+                        
+                        Button{
+                            withAnimation{
+                                events.isCompleted.toggle()
+                            }
+                        } label: {
+                            Text("Mark as \(events.isCompleted ? "Incompleted" : "Completed")")
+                                .foregroundColor(events.isCompleted ? .red : .blue)
+                        }
+                        Spacer()
+                        
+                    }
+                }
+                
+                
             }
-            
         }
         
-    
-        
-        struct StreakDetailView_Previews: PreviewProvider {
-            static var previews: some View {
-                StreakDetailView (events: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
-            }
-        }
     }
+    
+    func timePeriodTest() -> DateComponents {
+        let userDate = Calendar.current.dateComponents([.day, .month, .year], from: events.date)
+        
+        let userDateComponents = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day!).date!
+        
+        var daysUntil = Calendar.current.dateComponents([.day], from: userDateComponents, to: Date())
+        
+        
+        let userDateComponentsTwo = DateComponents(calendar: Calendar.current, year: userDate.year!, month: userDate.month!, day: userDate.day! + 1).date!
+        
+        var daysUntilButNot = Calendar.current.dateComponents([.day], from: Date(), to: userDateComponentsTwo)
+        
+        if userDateComponents != Date() {
+            daysUntil = daysUntilButNot
+        }
+        
+        return daysUntil
+        
+    }
+
+    
+}
+
+
+struct StreakDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        StreakDetailView (events: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
+    }
+}
 
