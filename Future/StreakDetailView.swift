@@ -116,7 +116,7 @@ struct StreakDetailView: View {
                         
                         Text("\(calcDistance(events.date)) left")
                             .font(.system(size: 40))
-                            .foregroundColor(.black)
+                            
                     }
                     
                 }
@@ -203,6 +203,7 @@ struct StreakDetailView: View {
 struct StreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
         StreakDetailView (events: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
+//            .environment(\.colorScheme, .dark)
     }
 }
 
