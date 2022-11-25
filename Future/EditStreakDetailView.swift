@@ -42,9 +42,10 @@ struct EditStreakDetailView: View {
                 
                 
                 if #available(iOS 14.0, *) {
-                    DatePicker("Choose the day", selection: $date)
+                    DatePicker("Pick a date", selection: $date, in: Date()..., displayedComponents: [.date])
                         .datePickerStyle(GraphicalDatePickerStyle())
                         .frame(maxHeight: 400)
+                    
                 } else {
                     DatePicker("Choose the day", selection: $date)
                         .frame(maxHeight: 400)
@@ -149,6 +150,7 @@ struct EditStreakDetailView: View {
 struct EditStreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
         EditStreakDetailView(events: .constant([]))
+            .previewInterfaceOrientation(.portrait)
         
     }
 }
