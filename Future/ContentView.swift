@@ -16,7 +16,7 @@ struct ContentView: View {
                 }
             CompletedView(events: $events)
                 .tabItem {
-                    Label("Completed", systemImage: "number.circle")
+                    Label("Passed", systemImage: "number.circle")
                 }
             LocalNotificationView()
                 .tabItem {

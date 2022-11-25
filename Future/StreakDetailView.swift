@@ -96,8 +96,8 @@ struct StreakDetailView: View {
                             .rotationEffect(Angle(degrees: 270.0))
                             .frame(height: 270)
                         
-                        Text("\(timePeriodTest().day!) Days Left")
-                            .font(.system(size: 52))
+                        Text("\(calcDistance(events.date)) left")
+                            .font(.system(size: 40))
                             .foregroundColor(.black)
                     }
                     
@@ -146,6 +146,29 @@ struct StreakDetailView: View {
             }
         }
         
+    }
+    
+    func calcDistance(_ date: Date) -> String {
+        var dist = Date.now.distance(to: date)
+        var result = 0
+        var time = ""
+        if dist/86400 > 1 {
+            result = Int(dist/86400) + 1
+            time = "d"
+        } else if dist/3600 > 1 {
+            result = Int(dist/3600) + 1
+            time = "h"
+        } else if dist/60 > 1 {
+            result = Int(dist/60) + 1
+            time = "m"
+        } else {
+            result = Int(dist)
+            time = "s"
+        }
+        
+        result = (result < 0 ? 0:result)
+        
+        return String(result) + time
     }
     
     func timePeriodTest() -> DateComponents {

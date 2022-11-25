@@ -16,7 +16,12 @@ struct CompletedView: View {
     
     //    @StateObject var todoManager = TodoManager()
     
+    @State var dotdotdot = "..."
+    
     @State var streakCompleted = false
+    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    @State var index = false
     
     var body: some View {
         NavigationView{
@@ -25,31 +30,43 @@ struct CompletedView: View {
                 VStack {
                     LazyVGrid(columns: columns, spacing: 50) {
                         ForEach($events) { $event in
-                            if event.isCompleted {
+                            if display(event.date) {
                                 NavigationLink{
                                     StreakDetailView(events: $event)
                                 } label: {
-                                    ZStack {
-                                        Circle()
-                                            .foregroundColor(event.colour == "red" ? .red:event.colour == "blue" ? .blue:.green)
-                                            .opacity(0.5)
-                                            .frame(width: geometry.size.width/3 - 15 ,
-                                                   height: geometry.size.width/3 - 15)
-                                        
-                                        Image(systemName: "pencil.circle.fill")
-                                            .resizable()
-                                            .frame(width: 40, height: 40)
-                                            .foregroundColor(.white)
+                                    VStack {
+                                        ZStack {
+                                            Circle()
+                                                .foregroundColor(event.colour == "red" ? .red:event.colour == "blue" ? .blue:.green)
+                                                .opacity(0.5)
+                                                .frame(width: geometry.size.width/3 - 15 ,
+                                                       height: geometry.size.width/3 - 15)
+                                            
+                                            Image(systemName: "seal")
+                                                .resizable()
+                                                .frame(width: 40, height: 40)
+                                                .foregroundColor(.white)
+                                        }
+                                        if event.title.count < 17 {
+                                            Text(event.title)
+                                        } else {
+                                            Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
+                                        }
                                     }
                                 }
                             }
                         }
+                        .onReceive(timer, perform: { _ in
+                            
+                            index.toggle()
+                            dotdotdot = (index ? "..." : "..")
+                        })
                     }
                 }
                 .padding()
             }
             .frame(height: 600)
-            .navigationTitle("Completed")
+            .navigationTitle("Past Countdowns")
             
             
             
@@ -57,6 +74,13 @@ struct CompletedView: View {
             // Fallback on earlier versions
             // }
         }
+    }
+    
+    func display(_ date: Date) -> Bool {
+        var dist = Date.now.distance(to: date)
+        var result = (dist > 0 ? false : true)
+        
+        return result
     }
     
 }

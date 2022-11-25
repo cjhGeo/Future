@@ -89,7 +89,7 @@ struct EditStreakDetailView: View {
                     Spacer()
                     
                     Button("Save Event"){
-                    distance = currDate.distance(to: date)
+                        distance = Date.now.distance(to: date)
                         
                         events.append(Event(title: title, date: date, status: RepeatType.never, colour: colours, distance: distance))
                         dismiss()

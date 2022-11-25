@@ -17,27 +17,41 @@ struct CountdownsView: View {
     
     @State var isSheetPresented = false
     
+    @State var currDate = Date.now
+    
     @State var scam = false
     
     @State var editMode = EditMode.active
     
     @State var presentation = true
     
+    @State var dotdotdot = "..."
+    
     let endOfSmth = "."
     
+    @State var distance = 0.0
     
+    @State var plsWork = ""
+    
+    let timer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
+    
+    @State var index = false
     
     //    @StateObject var todoManager = TodoManager()
     
     var body: some View {
         NavigationView{
             
+            
+            
             if presentation {
                 GeometryReader { geometry in
                     VStack {
                         LazyVGrid(columns: columns, spacing: 50) {
                             ForEach($events) { $event in
-                                if !event.isCompleted {
+                                
+                                
+                                if display(event.date) {
                                     NavigationLink{
                                         StreakDetailView(events: $event)
                                     } label: {
@@ -49,14 +63,20 @@ struct CountdownsView: View {
                                                     .frame(width: geometry.size.width/3 - 15 ,
                                                            height: geometry.size.width/3 - 15)
                                                 
-                                                Text("\(calcDistance(event.distance))")
+                                                Text("\(calcDistance(event.date))")
                                                     .foregroundColor(.black)
-                                                    .font(.system(size: 50))
+                                                    .font(.system(size: 40))
+                                                    .onReceive(timer, perform: { _ in
+                                                        
+                                                        index.toggle()
+                                                    })
+                                                
+                                                
                                             }
                                             if event.title.count < 17 {
                                                 Text(event.title)
                                             } else {
-                                                Text("\(event.title.substring(toIndex: 15))...")
+                                                Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
                                             }
                                         }
                                     }
@@ -132,19 +152,33 @@ struct CountdownsView: View {
         }
     }
     
-    func calcDistance(_ dist: Double) -> Int {
+    func display(_ date: Date) -> Bool {
+        var dist = Date.now.distance(to: date)
+        var result = (dist > 0 ? true : false)
+        
+        return result
+    }
+    
+    func calcDistance(_ date: Date) -> String {
+        var dist = Date.now.distance(to: date)
         var result = 0
+        var time = ""
         if dist/86400 > 1 {
             result = Int(dist/86400) + 1
         } else if dist/3600 > 1 {
             result = Int(dist/3600) + 1
+            time = "h"
         } else if dist/60 > 1 {
             result = Int(dist/60) + 1
+            time = "m"
         } else {
             result = Int(dist)
+            time = "s"
         }
         
-        return result
+        result = (result < 0 ? 0:result)
+        
+        return String(result) + time
     }
     
     
@@ -171,7 +205,7 @@ struct CountdownsView: View {
 
 struct CountdownsView_Previews: PreviewProvider {
     static var previews: some View {
-        CountdownsView(events: .constant([Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")]),
+        CountdownsView(events: .constant([Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode", distance: 5.0)]),
                        
                        eventsTwo: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
         
