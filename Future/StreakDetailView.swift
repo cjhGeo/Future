@@ -22,6 +22,8 @@ struct StreakDetailView: View {
     @State var pin = false
     @State var repeats = ""
     
+    @State var isSheetPresented = false
+    
     @Environment(\.dismiss) var dismiss
     
     let dateFormatter: DateFormatter = {
@@ -36,7 +38,7 @@ struct StreakDetailView: View {
     
     var body: some View {
         VStack {
-            Form {
+            List {
                 Text(events.title)
                     .multilineTextAlignment(.center)
                 HStack {
@@ -90,7 +92,7 @@ struct StreakDetailView: View {
                             .frame(height: 270)
                         
                         Circle()
-                            .trim(from: 0.0, to: 60/100)
+                            .trim(from: 0.0, to: (events.distance - calcDistanceButDouble(events.date))/events.distance)
                             .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color.green)
                             .rotationEffect(Angle(degrees: 270.0))
@@ -101,15 +103,6 @@ struct StreakDetailView: View {
                             .foregroundColor(.black)
                     }
                     
-                    HStack {
-                        Spacer()
-                        Button {
-                        } label: {
-                            Text("Save as image")
-                                .foregroundColor(.blue)
-                        }
-                        Spacer()
-                    }
                 }
                 
                 //                VStack{
@@ -125,24 +118,21 @@ struct StreakDetailView: View {
                 //
                 //
                 
-                Section {
-                    HStack {
-                        Spacer()
-                        
-                        Button{
-                            withAnimation{
-                                events.isCompleted.toggle()
-                            }
-                        } label: {
-                            Text("Mark as \(events.isCompleted ? "Incompleted" : "Completed")")
-                                .foregroundColor(events.isCompleted ? .red : .blue)
-                        }
-                        Spacer()
-                        
+                
+            }
+            //            .sheet(isPresented: $isSheetPresented) {
+            //                EditStreakDetailView(events: $eventsTwo)
+            //
+            //            }
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        //                        presentation = true
+                        //                        editMode = EditMode.inactive
+                    } label : {
+                        Text("Done")
                     }
                 }
-                
-                
             }
         }
         
@@ -171,6 +161,15 @@ struct StreakDetailView: View {
         return String(result) + time
     }
     
+    func calcDistanceButDouble(_ date: Date) -> Double {
+        var dist = Date.now.distance(to: date)
+        var result = dist
+        
+        result = (result < 0.0 ? 0.0 : result)
+        
+        return result
+    }
+    
     func timePeriodTest() -> DateComponents {
         let userDate = Calendar.current.dateComponents([.day, .month, .year], from: events.date)
         
@@ -190,7 +189,7 @@ struct StreakDetailView: View {
         return daysUntil
         
     }
-
+    
     
 }
 
