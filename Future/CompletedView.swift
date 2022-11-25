@@ -12,7 +12,7 @@ struct CompletedView: View {
                                GridItem(.flexible())]
     
     
-    @Binding var events: [Event]
+    @StateObject var eventManager = EventManager()
     
     //    @StateObject var todoManager = TodoManager()
     
@@ -29,7 +29,7 @@ struct CompletedView: View {
             GeometryReader { geometry in
                 VStack {
                     LazyVGrid(columns: columns, spacing: 50) {
-                        ForEach($events) { $event in
+                        ForEach($eventManager.events) { $event in
                             if display(event.date) {
                                 NavigationLink{
                                     StreakDetailView(events: $event)
@@ -49,8 +49,10 @@ struct CompletedView: View {
                                         }
                                         if event.title.count < 17 {
                                             Text(event.title)
+                                                .foregroundColor(.black)
                                         } else {
                                             Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
+                                                .foregroundColor(.black)
                                         }
                                     }
                                 }
@@ -59,8 +61,6 @@ struct CompletedView: View {
                         .onReceive(timer, perform: { _ in
                             
                             index.toggle()
-                            
-                            dotdotdot = (index ? "..." : "..")
                         })
                     }
                 }
@@ -88,6 +88,6 @@ struct CompletedView: View {
 
 struct CompletedView_Previews: PreviewProvider {
     static var previews: some View {
-        CompletedView(events: .constant([Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")]))
+        CompletedView(eventManager: EventManager())
     }
 }

@@ -199,7 +199,7 @@ struct StreakDetailView: View {
 
 struct StreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        StreakDetailView (events: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
+        StreakDetailView (events: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
     }
 }
 

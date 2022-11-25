@@ -3,24 +3,18 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @State var events = [
-        Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode", isCompleted: true),
-        Event(title: "Dora's Birthday", status: RepeatType.annually),
-        Event(title: "Go get free points in giveaways", status: RepeatType.annually)]
+    
+    @StateObject var eventManager = EventManager()
     
     var body: some View {
         TabView {
-            CountdownsView(events: $events, eventsTwo: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
+            CountdownsView(eventManager: eventManager, eventsTwo: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
                 .tabItem {
                     Label("Scheduled", systemImage: "checkmark.circle.fill")
                 }
-            CompletedView(events: $events)
+            CompletedView(eventManager: eventManager)
                 .tabItem {
                     Label("Passed", systemImage: "number.circle")
-                }
-            LocalNotifications()
-                .tabItem {
-                    Label("Notification", systemImage: "bell")
                 }
         }
     }

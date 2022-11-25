@@ -64,18 +64,6 @@ struct EditStreakDetailView: View {
                     }
                 }
                 
-                Section{
-                    Picker("Repeat", selection: $repeats) {
-                        Text("Never")
-                            .tag(RepeatType.never)
-                        Text("Weekly")
-                            .tag(RepeatType.weekly)
-                        Text("Monthly")
-                            .tag(RepeatType.monthly)
-                        Text("Annually")
-                            .tag(RepeatType.annually)
-                    }.pickerStyle(MenuPickerStyle())
-                }
                 
                 //                                Section {
                 //                                    Toggle("Notifictions", isOn: $showRequest)
@@ -92,7 +80,7 @@ struct EditStreakDetailView: View {
                     Button("Save Event"){
                         distance = Date.now.distance(to: date)
                         
-                        events.append(Event(title: title, date: date, status: RepeatType.never, colour: colours, distance: distance))
+                        events.append(Event(title: title, date: date, colour: colours, distance: distance))
                         dismiss()
                         
                         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in

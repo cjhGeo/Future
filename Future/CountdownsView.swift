@@ -11,7 +11,7 @@ struct CountdownsView: View {
     let columns: [GridItem] = [GridItem(.flexible()),
                                GridItem(.flexible())]
     
-    @Binding var events: [Event]
+    @StateObject var eventManager = EventManager()
     
     @Binding var eventsTwo: Event
     
@@ -48,7 +48,7 @@ struct CountdownsView: View {
                 GeometryReader { geometry in
                     VStack {
                         LazyVGrid(columns: columns, spacing: 50) {
-                            ForEach($events) { $event in
+                            ForEach($eventManager.events) { $event in
                                 
                                 
                                 if display(event.date, title: event.title) {
@@ -75,8 +75,10 @@ struct CountdownsView: View {
                                             }
                                             if event.title.count < 17 {
                                                 Text(event.title)
+                                                    .foregroundColor(.black)
                                             } else {
                                                 Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
+                                                    .foregroundColor(.black)
                                             }
                                         }
                                     }
@@ -107,14 +109,14 @@ struct CountdownsView: View {
                     }
                 }
                 .sheet(isPresented: $isSheetPresented) {
-                    EditStreakDetailView(events: $events)
+                    EditStreakDetailView(events: $eventManager.events)
                     
                 }
                 .environment(\.editMode, $editMode)
                 
             } else {
                 List {
-                    ForEach($events) { $event in
+                    ForEach($eventManager.events) { $event in
                         if !event.isCompleted {
                             NavigationLink{
                                 StreakDetailView(events: $event)
@@ -124,10 +126,10 @@ struct CountdownsView: View {
                         }
                     }
                     .onDelete { indexSet in
-                        events.remove(atOffsets: indexSet)
+                        eventManager.events.remove(atOffsets: indexSet)
                     }
                     .onMove { originalOffset, newOffset in
-                        events.move(fromOffsets: originalOffset, toOffset: newOffset)
+                        eventManager.events.move(fromOffsets: originalOffset, toOffset: newOffset)
                     }
                 }
                 .toolbar {
@@ -207,9 +209,9 @@ struct CountdownsView: View {
 
 struct CountdownsView_Previews: PreviewProvider {
     static var previews: some View {
-        CountdownsView(events: .constant([Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode", distance: 5.0)]),
+        CountdownsView(eventManager: EventManager(),
                        
-                       eventsTwo: .constant(Event(title: "Watch newest paw patrol release", status: RepeatType.annually, details: "new episode")))
+                       eventsTwo: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
         
     }
 }
