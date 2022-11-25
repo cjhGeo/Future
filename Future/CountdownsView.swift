@@ -55,9 +55,10 @@ struct CountdownsView: View {
                                             ZStack {
                                                 Circle()
                                                     .foregroundColor(event.colour == "red" ? .red : event.colour == "blue" ? .blue : .green)
-                                                    .opacity(0.5)
+                                                    .opacity(0.6)
                                                     .frame(width: geometry.size.width/3 - 15 ,
                                                            height: geometry.size.width/3 - 15)
+                                                    .shadow(radius: 15)
                                                 
                                                 Text("\(calcDistance(event.date))")
                                                     .foregroundColor(.black)
@@ -69,6 +70,8 @@ struct CountdownsView: View {
                                                 
                                                 
                                             }
+//                                            .background(
+//                                                .shadow(color: .purple, radius: 3, x: 0.5, y: 1))
                                             if event.title.count < 17 {
                                                 Text(event.title)
                                                     .foregroundColor(.black)
