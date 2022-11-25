@@ -40,8 +40,14 @@ struct StreakDetailView: View {
         VStack {
             List {
                 HStack {
-                    TextField("Title", text: $events.title)
-                        .multilineTextAlignment(.center)
+                    if #available(iOS 16.0, *) {
+                        TextField("Title", text: $events.title)
+                            .bold()
+                            .multilineTextAlignment(.center)
+                    } else {
+                        // Fallback on earlier versions
+                    }
+                        
                 }
                 
                 HStack {
@@ -99,18 +105,18 @@ struct StreakDetailView: View {
                             .stroke(lineWidth: 20.0)
                             .opacity(0.3)
                             .foregroundColor(Color.green)
-                            .frame(height: 270)
+                            .frame(height: 240)
                         
                         Circle()
                             .trim(from: 0.0, to: (events.distance - calcDistanceButDouble(events.date))/events.distance)
                             .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color.green)
                             .rotationEffect(Angle(degrees: 270.0))
-                            .frame(height: 270)
+                            .frame(height: 240)
                         
                         Text("\(calcDistance(events.date)) left")
                             .font(.system(size: 40))
-                            .foregroundColor(.black)
+                            
                     }
                     
                 }
@@ -197,6 +203,7 @@ struct StreakDetailView: View {
 struct StreakDetailView_Previews: PreviewProvider {
     static var previews: some View {
         StreakDetailView (events: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
+//            .environment(\.colorScheme, .dark)
     }
 }
 

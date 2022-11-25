@@ -42,15 +42,11 @@ struct CountdownsView: View {
     var body: some View {
         NavigationView{
             
-            
-            
             if presentation {
                 GeometryReader { geometry in
                     VStack {
                         LazyVGrid(columns: columns, spacing: 50) {
                             ForEach($eventManager.events) { $event in
-                                
-                                
                                 if display(event.date, title: event.title) {
                                     NavigationLink{
                                         StreakDetailView(events: $event)
@@ -59,13 +55,14 @@ struct CountdownsView: View {
                                             ZStack {
                                                 Circle()
                                                     .foregroundColor(event.colour == "red" ? .red : event.colour == "blue" ? .blue : .green)
-                                                    .opacity(0.5)
+                                                    .opacity(0.6)
                                                     .frame(width: geometry.size.width/3 - 15 ,
                                                            height: geometry.size.width/3 - 15)
+                                                    .shadow(radius: 15)
                                                 
                                                 Text("\(calcDistance(event.date))")
                                                     .foregroundColor(.black)
-                                                    .font(.system(size: 40))
+                                                    .font(.system(size: 35))
                                                     .onReceive(timer, perform: { _ in
                                                         
                                                         index.toggle()
@@ -73,6 +70,8 @@ struct CountdownsView: View {
                                                 
                                                 
                                             }
+//                                            .background(
+//                                                .shadow(color: .purple, radius: 3, x: 0.5, y: 1))
                                             if event.title.count < 17 {
                                                 Text(event.title)
                                                     .foregroundColor(.black)
