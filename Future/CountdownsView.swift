@@ -42,15 +42,11 @@ struct CountdownsView: View {
     var body: some View {
         NavigationView{
             
-            
-            
             if presentation {
                 GeometryReader { geometry in
                     VStack {
                         LazyVGrid(columns: columns, spacing: 50) {
                             ForEach($eventManager.events) { $event in
-                                
-                                
                                 if display(event.date, title: event.title) {
                                     NavigationLink{
                                         StreakDetailView(events: $event)
@@ -65,7 +61,7 @@ struct CountdownsView: View {
                                                 
                                                 Text("\(calcDistance(event.date))")
                                                     .foregroundColor(.black)
-                                                    .font(.system(size: 40))
+                                                    .font(.system(size: 35))
                                                     .onReceive(timer, perform: { _ in
                                                         
                                                         index.toggle()
