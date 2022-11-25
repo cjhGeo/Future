@@ -80,39 +80,41 @@ struct EditStreakDetailView: View {
                     Button("Save Event"){
                         distance = Date.now.distance(to: date)
                         
-                        events.append(Event(title: title, date: date, colour: colours, distance: distance))
-                        dismiss()
-                        
-                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-                            if success {
-                                print("All Set!")
-                            } else if let error = error {
-                                print(error.localizedDescription)
-                            }
+                        if distance > 0 {
+                            events.append(Event(title: title, date: date, colour: colours, distance: distance))
+                            dismiss()
                             
-                            let content = UNMutableNotificationContent()
-                            content.title = title
-                            content.subtitle = ""
-                            content.sound = UNNotificationSound.default
-                            content.interruptionLevel = .critical
-
-                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(Int(distance)), repeats: false)
-
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-                            UNUserNotificationCenter.current().add(request)
+                            UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                                if success {
+                                    print("All Set!")
+                                } else if let error = error {
+                                    print(error.localizedDescription)
+                                }
+                                
+                                let content = UNMutableNotificationContent()
+                                content.title = title
+                                content.subtitle = ""
+                                content.sound = UNNotificationSound.default
+                                content.interruptionLevel = .critical
+                                
+                                let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(Int(distance)), repeats: false)
+                                
+                                let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                                
+                                UNUserNotificationCenter.current().add(request)
+                            }
+                            //
+                            //                        let content = UNMutableNotificationContent()
+                            //                        content.title = "title"
+                            //                        content.sound = UNNotificationSound.default
+                            //                        content.interruptionLevel = .critical
+                            //
+                            //                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+                            //
+                            //                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                            //
+                            //                        UNUserNotificationCenter.current().add(request)
                         }
-//
-//                        let content = UNMutableNotificationContent()
-//                        content.title = "title"
-//                        content.sound = UNNotificationSound.default
-//                        content.interruptionLevel = .critical
-//
-//                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-//
-//                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-//
-//                        UNUserNotificationCenter.current().add(request)
                     }
                     //                    .padding()
                     
