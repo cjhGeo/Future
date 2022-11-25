@@ -47,7 +47,7 @@ struct EditStreakDetailView: View {
                         .frame(maxHeight: 400)
                     
                 } else {
-                    DatePicker("Choose the day", selection: $date)
+                    DatePicker("Pick a date", selection: $date, in: Date()..., displayedComponents: [.date])
                         .frame(maxHeight: 400)
                 }
                 
