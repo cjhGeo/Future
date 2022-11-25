@@ -40,11 +40,8 @@ struct StreakDetailView: View {
         VStack {
             List {
                 HStack {
-                    Spacer()
-                    
                     TextField("Title", text: $events.title)
-                    
-                    Spacer()
+                        .multilineTextAlignment(.center)
                 }
                 
                 HStack {
