@@ -153,18 +153,19 @@ struct CountdownsView: View {
     }
     
     func display(_ date: Date) -> Bool {
-        var dist = Date.now.distance(to: date)
-        var result = (dist > 0 ? true : false)
+        let dist = Date.now.distance(to: date)
+        let result = (dist > 0 ? true : false)
         
         return result
     }
     
     func calcDistance(_ date: Date) -> String {
-        var dist = Date.now.distance(to: date)
+        let dist = Date.now.distance(to: date)
         var result = 0
         var time = ""
         if dist/86400 > 1 {
             result = Int(dist/86400) + 1
+            time = "d"
         } else if dist/3600 > 1 {
             result = Int(dist/3600) + 1
             time = "h"

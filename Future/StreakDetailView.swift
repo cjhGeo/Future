@@ -22,7 +22,7 @@ struct StreakDetailView: View {
     @State var pin = false
     @State var repeats = ""
     
-    @State var isSheetPresented = false
+    @State var dateEdit = false
     
     @Environment(\.dismiss) var dismiss
     
@@ -39,23 +39,36 @@ struct StreakDetailView: View {
     var body: some View {
         VStack {
             List {
-                Text(events.title)
-                    .multilineTextAlignment(.center)
                 HStack {
+                    Spacer()
                     
-                    Section() {
-                        Text(events.date, formatter: dateFormatter)
-                            .multilineTextAlignment(.center)
-                    }
+                    TextField("Title", text: $events.title)
                     
-                    Text("|")
+                    Spacer()
+                }
+                
+                HStack {
+                    Spacer()
                     
-                    Section() {
-                        
-                        Text(events.status.rawValue)
-                            .multilineTextAlignment(.center)
+                    Text(events.date, formatter: dateFormatter)
+                    
+                    Spacer()
+                }
+                .onTapGesture {
+                    dateEdit.toggle()
+                }
+                
+                if dateEdit {
+                    if #available(iOS 14.0, *) {
+                        DatePicker("Choose the day", selection: $events.date)
+                            .datePickerStyle(GraphicalDatePickerStyle())
+                            .frame(maxHeight: 400)
+                    } else {
+                        DatePicker("Choose the day", selection: $events.date)
+                            .frame(maxHeight: 400)
                     }
                 }
+                
                 
                 //                VStack{
                 //                    Section{
@@ -104,42 +117,32 @@ struct StreakDetailView: View {
                     }
                     
                 }
-                
-                //                VStack{
-                //                    Section{
-                //                        Toggle("Notifications", isOn: $showRequest)
-                //                            .toggleStyle(SwitchToggleStyle(tint: .red))
-                //                    }
-                //                    //                    if showRequest {
-                //                    //                        LocalNotificationView() = true
-                //                    //                    }
-                //                }
-                //
-                //
-                //
-                
-                
             }
-            //            .sheet(isPresented: $isSheetPresented) {
-            //                EditStreakDetailView(events: $eventsTwo)
+            //                VStack{
+            //                    Section{
+            //                        Toggle("Notifications", isOn: $showRequest)
+            //                            .toggleStyle(SwitchToggleStyle(tint: .red))
+            //                    }
+            //                    //                    if showRequest {
+            //                    //                        LocalNotificationView() = true
+            //                    //                    }
+            //                }
             //
-            //            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        //                        presentation = true
-                        //                        editMode = EditMode.inactive
-                    } label : {
-                        Text("Done")
-                    }
-                }
-            }
+            //
+            //
+            
+            
         }
-        
+        //            .sheet(isPresented: $isSheetPresented) {
+        //                EditStreakDetailView(events: $eventsTwo)
+        //
+        //            }
     }
     
+    
+    
     func calcDistance(_ date: Date) -> String {
-        var dist = Date.now.distance(to: date)
+        let dist = Date.now.distance(to: date)
         var result = 0
         var time = ""
         if dist/86400 > 1 {
@@ -162,7 +165,7 @@ struct StreakDetailView: View {
     }
     
     func calcDistanceButDouble(_ date: Date) -> Double {
-        var dist = Date.now.distance(to: date)
+        let dist = Date.now.distance(to: date)
         var result = dist
         
         result = (result < 0.0 ? 0.0 : result)

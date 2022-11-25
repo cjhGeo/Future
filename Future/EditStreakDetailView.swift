@@ -104,8 +104,7 @@ struct EditStreakDetailView: View {
                         }
                         
                         let content = UNMutableNotificationContent()
-                        content.title = "Check Your Streak's Progress!"
-                        content.subtitle = "Click here to repeat the Streak!"
+                        content.title = "title"
                         content.sound = UNNotificationSound.default
                         content.interruptionLevel = .critical
                         

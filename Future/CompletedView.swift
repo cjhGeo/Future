@@ -59,6 +59,8 @@ struct CompletedView: View {
                         .onReceive(timer, perform: { _ in
                             
                             index.toggle()
+                            
+                            dotdotdot = (index ? "..." : "..")
                         })
                     }
                 }
@@ -76,8 +78,8 @@ struct CompletedView: View {
     }
     
     func display(_ date: Date) -> Bool {
-        var dist = Date.now.distance(to: date)
-        var result = (dist > 0 ? false : true)
+        let dist = Date.now.distance(to: date)
+        let result = (dist > 0 ? false : true)
         
         return result
     }
