@@ -5,6 +5,8 @@ struct EditStreakDetailView: View {
     
     @State var currDate = Date.now
     
+    @State var availableDate = Date()...
+    
     @State var title = ""
     @State var startingDate = ""
     @State var pin = false
@@ -42,12 +44,12 @@ struct EditStreakDetailView: View {
                 
                 
                 if #available(iOS 14.0, *) {
-                    DatePicker("Pick a date", selection: $date, in: Date()...)
+                    DatePicker("Pick a date", selection: $date, in: availableDate)
                         .datePickerStyle(GraphicalDatePickerStyle())
                         .frame(maxHeight: 400)
                     
-                } else {
-                    DatePicker("Pick a date", selection: $date, in: Date()... )
+                } else { 
+                    DatePicker("Pick a date", selection: $date, in: availableDate)
                         .frame(maxHeight: 400)
                 }
                 

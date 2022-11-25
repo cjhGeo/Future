@@ -17,6 +17,9 @@ struct StreakDetailView: View {
     @State var LocalNotificationView = false
     
     @State var currDate = Date.now
+    
+    @State var availableDate = Date()...
+    
     @State var title = ""
     @State var startingDate = ""
     @State var pin = false
@@ -40,13 +43,7 @@ struct StreakDetailView: View {
         VStack {
             List {
                 HStack {
-                    if #available(iOS 16.0, *) {
-                        TextField("Title", text: $events.title)
-                            .bold()
-                            .multilineTextAlignment(.center)
-                    } else {
-                        // Fallback on earlier versions
-                    }
+                        TextField("Title", text: $events.title)                            .multilineTextAlignment(.center)
                         
                 }
                 
@@ -63,11 +60,11 @@ struct StreakDetailView: View {
                 
                 if dateEdit {
                     if #available(iOS 14.0, *) {
-                        DatePicker("Pick a date", selection: $events.date, in: Date()... )
+                        DatePicker("Pick a date", selection: $events.date, in: availableDate)
                             .datePickerStyle(GraphicalDatePickerStyle())
                             .frame(maxHeight: 400)
                     } else {
-                        DatePicker("Pick a date", selection: $events.date, in: Date()... )
+                        DatePicker("Pick a date", selection: $events.date, in: availableDate)
                             .frame(maxHeight: 400)
                     }
                 }
