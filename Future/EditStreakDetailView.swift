@@ -42,12 +42,12 @@ struct EditStreakDetailView: View {
                 
                 
                 if #available(iOS 14.0, *) {
-                    DatePicker("Pick a date", selection: $date, in: Date()..., displayedComponents: [.date])
+                    DatePicker("Pick a date", selection: $date, in: Date()...)
                         .datePickerStyle(GraphicalDatePickerStyle())
                         .frame(maxHeight: 400)
                     
                 } else {
-                    DatePicker("Pick a date", selection: $date, in: Date()..., displayedComponents: [.date])
+                    DatePicker("Pick a date", selection: $date, in: Date()... )
                         .frame(maxHeight: 400)
                 }
                 

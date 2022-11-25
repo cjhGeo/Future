@@ -57,11 +57,11 @@ struct StreakDetailView: View {
                 
                 if dateEdit {
                     if #available(iOS 14.0, *) {
-                        DatePicker("Pick a date", selection: $events.date, in: Date()..., displayedComponents: [.date] )
+                        DatePicker("Pick a date", selection: $events.date, in: Date()... )
                             .datePickerStyle(GraphicalDatePickerStyle())
                             .frame(maxHeight: 400)
                     } else {
-                        DatePicker("Pick a date", selection: $events.date, in: Date()..., displayedComponents: [.date])
+                        DatePicker("Pick a date", selection: $events.date, in: Date()... )
                             .frame(maxHeight: 400)
                     }
                 }
