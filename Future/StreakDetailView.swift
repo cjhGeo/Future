@@ -105,14 +105,14 @@ struct StreakDetailView: View {
                             .stroke(lineWidth: 20.0)
                             .opacity(0.3)
                             .foregroundColor(Color.green)
-                            .frame(height: 250)
+                            .frame(height: 240)
                         
                         Circle()
                             .trim(from: 0.0, to: (events.distance - calcDistanceButDouble(events.date))/events.distance)
                             .stroke(style: StrokeStyle(lineWidth: 20.0, lineCap: .round, lineJoin: .round))
                             .foregroundColor(Color.green)
                             .rotationEffect(Angle(degrees: 270.0))
-                            .frame(height: 250)
+                            .frame(height: 240)
                         
                         Text("\(calcDistance(events.date)) left")
                             .font(.system(size: 40))
