@@ -1,4 +1,5 @@
 import SwiftUI
+import UserNotifications
 
 struct EditStreakDetailView: View {
     
@@ -93,6 +94,26 @@ struct EditStreakDetailView: View {
                         
                         events.append(Event(title: title, date: date, status: RepeatType.never, colour: colours, distance: distance))
                         dismiss()
+                        
+                        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+                            if success {
+                                print("All Set!")
+                            } else if let error = error {
+                                print(error.localizedDescription)
+                            }
+                        }
+                        
+                        let content = UNMutableNotificationContent()
+                        content.title = "Check Your Streak's Progress!"
+                        content.subtitle = "Click here to repeat the Streak!"
+                        content.sound = UNNotificationSound.default
+                        content.interruptionLevel = .critical
+                        
+                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+                        
+                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        
+                        UNUserNotificationCenter.current().add(request)
                     }
                     //                    .padding()
                     
