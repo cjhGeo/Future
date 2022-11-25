@@ -59,7 +59,6 @@ struct CompletedView: View {
                         .onReceive(timer, perform: { _ in
                             
                             index.toggle()
-                            dotdotdot = (index ? "..." : "..")
                         })
                     }
                 }
