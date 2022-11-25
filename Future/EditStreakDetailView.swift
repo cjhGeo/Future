@@ -101,18 +101,30 @@ struct EditStreakDetailView: View {
                             } else if let error = error {
                                 print(error.localizedDescription)
                             }
+                            
+                            let content = UNMutableNotificationContent()
+                            content.title = title
+                            content.subtitle = ""
+                            content.sound = UNNotificationSound.default
+                            content.interruptionLevel = .critical
+
+                            let trigger = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(Int(distance)), repeats: false)
+
+                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                            UNUserNotificationCenter.current().add(request)
                         }
-                        
-                        let content = UNMutableNotificationContent()
-                        content.title = "title"
-                        content.sound = UNNotificationSound.default
-                        content.interruptionLevel = .critical
-                        
-                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
-                        
-                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                        
-                        UNUserNotificationCenter.current().add(request)
+//
+//                        let content = UNMutableNotificationContent()
+//                        content.title = "title"
+//                        content.sound = UNNotificationSound.default
+//                        content.interruptionLevel = .critical
+//
+//                        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10, repeats: false)
+//
+//                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+//
+//                        UNUserNotificationCenter.current().add(request)
                     }
                     //                    .padding()
                     

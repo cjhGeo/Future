@@ -51,7 +51,7 @@ struct CountdownsView: View {
                             ForEach($events) { $event in
                                 
                                 
-                                if display(event.date) {
+                                if display(event.date, title: event.title) {
                                     NavigationLink{
                                         StreakDetailView(events: $event)
                                     } label: {
@@ -152,9 +152,10 @@ struct CountdownsView: View {
         }
     }
     
-    func display(_ date: Date) -> Bool {
+    func display(_ date: Date, title eventTitle: String) -> Bool {
         let dist = Date.now.distance(to: date)
         let result = (dist > 0 ? true : false)
+        
         
         return result
     }
