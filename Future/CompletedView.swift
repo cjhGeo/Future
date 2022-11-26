@@ -25,55 +25,56 @@ struct CompletedView: View {
     
     var body: some View {
         NavigationView{
-            
-            GeometryReader { geometry in
-                VStack {
-                    LazyVGrid(columns: columns, spacing: 50) {
-                        ForEach($eventManager.events) { $event in
-                            if display(event.date) {
-                                NavigationLink{
-                                    StreakDetailView(events: $event)
-                                } label: {
-                                    VStack {
-                                        ZStack {
-                                            Circle()
-                                                .foregroundColor(event.colour == "red" ? .red:event.colour == "blue" ? .blue:.green)
-                                                .opacity(0.5)
-                                                .frame(width: geometry.size.width/3 - 15 ,
-                                                       height: geometry.size.width/3 - 15)
-                                            
-                                            Image(systemName: "seal")
-                                                .resizable()
-                                                .frame(width: 40, height: 40)
-                                                .foregroundColor(.white)
-                                        }
-                                        if event.title.count < 17 {
-                                            Text(event.title)
-                                                .foregroundColor(.black)
-                                        } else {
-                                            Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
-                                                .foregroundColor(.black)
+            ScrollView{
+                GeometryReader { geometry in
+                    VStack {
+                        LazyVGrid(columns: columns, spacing: 50) {
+                            ForEach($eventManager.events) { $event in
+                                if display(event.date) {
+                                    NavigationLink{
+                                        StreakDetailView(events: $event)
+                                    } label: {
+                                        VStack {
+                                            ZStack {
+                                                Circle()
+                                                    .foregroundColor(event.colour == "red" ? .red:event.colour == "blue" ? .blue:.green)
+                                                    .opacity(0.5)
+                                                    .frame(width: geometry.size.width/3 - 15 ,
+                                                           height: geometry.size.width/3 - 15)
+                                                
+                                                Image(systemName: "seal")
+                                                    .resizable()
+                                                    .frame(width: 40, height: 40)
+                                                    .foregroundColor(.white)
+                                            }
+                                            if event.title.count < 17 {
+                                                Text(event.title)
+                                                    .foregroundColor(.black)
+                                            } else {
+                                                Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
+                                                    .foregroundColor(.black)
+                                            }
                                         }
                                     }
                                 }
                             }
+                            .onReceive(timer, perform: { _ in
+                                
+                                index.toggle()
+                            })
                         }
-                        .onReceive(timer, perform: { _ in
-                            
-                            index.toggle()
-                        })
                     }
+                    .padding()
                 }
-                .padding()
+                .frame(height: 600)
+                .navigationTitle("Past Countdowns")
+                
+                
+                
+                //else {
+                // Fallback on earlier versions
+                // }
             }
-            .frame(height: 600)
-            .navigationTitle("Past Countdowns")
-            
-            
-            
-            //else {
-            // Fallback on earlier versions
-            // }
         }
     }
     

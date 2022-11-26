@@ -41,116 +41,118 @@ struct CountdownsView: View {
     
     var body: some View {
         NavigationView{
-            
-            if presentation {
-                GeometryReader { geometry in
-                    VStack {
-                        LazyVGrid(columns: columns, spacing: 50) {
-                            ForEach($eventManager.events) { $event in
-                                if display(event.date, title: event.title) {
-                                    NavigationLink{
-                                        StreakDetailView(events: $event)
-                                    } label: {
-                                        VStack {
-                                            ZStack {
-                                                Circle()
-                                                    .foregroundColor(event.colour == "red" ? .red : event.colour == "blue" ? .blue : .green)
-                                                    .opacity(0.6)
-                                                    .frame(width: geometry.size.width/3 - 15 ,
-                                                           height: geometry.size.width/3 - 15)
-                                                    .shadow(radius: 15)
-                                                
-                                                Text("\(calcDistance(event.date))")
-                                                    .foregroundColor(.black)
-                                                    .font(.system(size: 35))
-                                                    .onReceive(timer, perform: { _ in
-                                                        
-                                                        index.toggle()
-                                                    })
-                                                
-                                                
-                                            }
-//                                            .background(
-//                                                .shadow(color: .purple, radius: 3, x: 0.5, y: 1))
-                                            if event.title.count < 17 {
-                                                Text(event.title)
-                                                    .foregroundColor(.black)
-                                            } else {
-                                                Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
-                                                    .foregroundColor(.black)
+            ScrollView{
+                if presentation {
+                    GeometryReader { geometry in
+                        VStack {
+                            LazyVGrid(columns: columns, spacing: 50) {
+                                ForEach($eventManager.events) { $event in
+                                    if display(event.date, title: event.title) {
+                                        NavigationLink{
+                                            StreakDetailView(events: $event)
+                                        } label: {
+                                            VStack {
+                                                ZStack {
+                                                    Circle()
+                                                        .foregroundColor(event.colour == "red" ? .red : event.colour == "blue" ? .blue : .green)
+                                                        .opacity(0.6)
+                                                        .frame(width: geometry.size.width/3 - 15 ,
+                                                               height: geometry.size.width/3 - 15)
+                                                        .shadow(radius: 15)
+                                                    
+                                                    Text("\(calcDistance(event.date))")
+                                                        .foregroundColor(.black)
+                                                        .font(.system(size: 35))
+                                                        .onReceive(timer, perform: { _ in
+                                                            
+                                                            index.toggle()
+                                                        })
+                                                    
+                                                    
+                                                }
+                                                //                                            .background(
+                                                //                                                .shadow(color: .purple, radius: 3, x: 0.5, y: 1))
+                                                if event.title.count < 17 {
+                                                    Text(event.title)
+                                                        .foregroundColor(.black)
+                                                } else {
+                                                    Text("\(event.title.substring(toIndex: 15))\(dotdotdot)")
+                                                        .foregroundColor(.black)
+                                                }
                                             }
                                         }
                                     }
                                 }
                             }
                         }
+                        .padding()
                     }
-                    .padding()
-                }
-                .frame(height: 600)
-                .navigationTitle("Countdowns")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            isSheetPresented = true
-                        } label: {
-                            Image(systemName: "plus")
-                        }
-                    }
-                    
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            presentation = false
-                            editMode = EditMode.active
-                        } label : {
-                            Text("Edit")
-                        }
-                    }
-                }
-                .sheet(isPresented: $isSheetPresented) {
-                    EditStreakDetailView(events: $eventManager.events)
-                    
-                }
-                .environment(\.editMode, $editMode)
-                
-            } else {
-                List {
-                    ForEach($eventManager.events) { $event in
-                        if !event.isCompleted {
-                            NavigationLink{
-                                StreakDetailView(events: $event)
+                    .frame(height: 600)
+                    .navigationTitle("Countdowns")
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button {
+                                isSheetPresented = true
                             } label: {
-                                Text(event.title)
+                                Image(systemName: "plus")
+                            }
+                        }
+                        
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                presentation = false
+                                editMode = EditMode.active
+                            } label : {
+                                Text("Edit")
                             }
                         }
                     }
-                    .onDelete { indexSet in
-                        eventManager.events.remove(atOffsets: indexSet)
+                    .sheet(isPresented: $isSheetPresented) {
+                        EditStreakDetailView(events: $eventManager.events)
+                        
                     }
-                    .onMove { originalOffset, newOffset in
-                        eventManager.events.move(fromOffsets: originalOffset, toOffset: newOffset)
-                    }
-                }
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
-                            presentation = true
-                            editMode = EditMode.inactive
-                        } label : {
-                            Text("Done")
+                    .environment(\.editMode, $editMode)
+                    
+                } else {
+                    List {
+                        ForEach($eventManager.events) { $event in
+                            if !event.isCompleted {
+                                NavigationLink{
+                                    StreakDetailView(events: $event)
+                                } label: {
+                                    Text(event.title)
+                                }
+                            }
+                        }
+                        .onDelete { indexSet in
+                            eventManager.events.remove(atOffsets: indexSet)
+                        }
+                        .onMove { originalOffset, newOffset in
+                            eventManager.events.move(fromOffsets: originalOffset, toOffset: newOffset)
                         }
                     }
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                presentation = true
+                                editMode = EditMode.inactive
+                            } label : {
+                                Text("Done")
+                            }
+                        }
+                    }
+                    .environment(\.editMode, $editMode)
                 }
-                .environment(\.editMode, $editMode)
+                
+                
+                
+                
+                //else {
+                // Fallback on earlier versions
+                // }
             }
-            
-            
-            
-            
-            //else {
-            // Fallback on earlier versions
-            // }
         }
+        
     }
     
     func display(_ date: Date, title eventTitle: String) -> Bool {

@@ -7,21 +7,21 @@ struct ContentView: View {
     @StateObject var eventManager = EventManager()
     
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.systemGray6
+        UITabBar.appearance().backgroundColor = UIColor.secondarySystemBackground
        }
 
     
     var body: some View {
-        TabView {
-            CountdownsView(eventManager: eventManager, eventsTwo: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
-                .tabItem {
-                    Label("Scheduled", systemImage: "checkmark.circle.fill")
-                }
-            CompletedView(eventManager: eventManager)
-                .tabItem {
-                    Label("Passed", systemImage: "number.circle")
-                }
-        }
+            TabView {
+                CountdownsView(eventManager: eventManager, eventsTwo: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
+                    .tabItem {
+                        Label("Scheduled", systemImage: "checkmark.circle.fill")
+                    }
+                CompletedView(eventManager: eventManager)
+                    .tabItem {
+                        Label("Passed", systemImage: "number.circle")
+                    }
+            }
     }
 }
 
