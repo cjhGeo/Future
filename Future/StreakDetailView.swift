@@ -43,7 +43,11 @@ struct StreakDetailView: View {
         VStack {
             List {
                 HStack {
-                        TextField("Title", text: $events.title)                            .multilineTextAlignment(.center)
+                    if #available(iOS 16.0, *) {
+                        TextField("Title", text: $events.title)     .bold()                     .multilineTextAlignment(.center)
+                    } else {
+                        // Fallback on earlier versions
+                    }
                         
                 }
                 

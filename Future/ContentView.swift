@@ -6,6 +6,11 @@ struct ContentView: View {
     
     @StateObject var eventManager = EventManager()
     
+    init() {
+        UITabBar.appearance().backgroundColor = UIColor.systemGray6
+       }
+
+    
     var body: some View {
         TabView {
             CountdownsView(eventManager: eventManager, eventsTwo: .constant(Event(title: "Watch newest paw patrol release", details: "new episode")))
